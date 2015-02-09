@@ -3,7 +3,7 @@
 // ASSIGNMENT 1 PART 1
 
 
-public class BaseballCard implements Cloneable, Comparable{
+public class BaseballCard implements Cloneable{
     private String name;
     private String manufacturer;
     private int year;
@@ -33,7 +33,7 @@ public class BaseballCard implements Cloneable, Comparable{
     }
 
     public String getManufacturer(){
-	return thus.manufacturer;
+	return this.manufacturer;
     }
     public int getYear(){
 	return this.year;
@@ -57,7 +57,7 @@ public class BaseballCard implements Cloneable, Comparable{
     public void setYear(int a){
 	this.year = a;
     }
-    public void setPrice throws Exception(double a){
+    public void setPrice(double a)throws Exception{
 	if(a < 0){
 	    throw new Exception("The input cannot be negative bro");
 	}
@@ -73,14 +73,15 @@ public class BaseballCard implements Cloneable, Comparable{
     public Object clone(){
 	try{
 	    return super.clone();
-	}catch CloneNotSupportedException ex{
+	}catch (CloneNotSupportedException ex){
 		return null;
-	    }
+	}
     }
-
-    public  boolean equals(Object obj){
+    
+    public  boolean equals(Object a){
 	boolean ans = true;
-	if(this.name != obj.getName()){
+	BaseballCard obj = (BaseballCard)a;
+	if(this.name != (obj.getName())){
 	    ans = false;
 	}
 	if(this.manufacturer != obj.getName()){
