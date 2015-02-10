@@ -1,3 +1,4 @@
+ls
 //RONALD BALCHAND
 //109806273
 //CSE 214
@@ -16,6 +17,7 @@ public class CardCollection{
 	return this.index - 1;
     }
 
-    public void addCard(baseballCard newCard, int position){
-	
+    public void addCard(baseballCard newCard, int position)throws Exception{
+	if(!(position >= 1)) || (!(position <= this.size()) {  
+	    
 }    
