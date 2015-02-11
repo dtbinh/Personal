@@ -57,12 +57,15 @@ public class BaseballCard implements Cloneable{
     public void setYear(int a){
 	this.year = a;
     }
-    public void setPrice(double a)throws Exception{
+    public void setPrice(double a)throws IllegalArgumentException{
 	if(a < 0){
-	    throw new Exception("The input cannot be negative bro");
+	    throw new IllegalArgumentException("The input cannot be negative");
 	}
+	
 	this.price = a;
+	
     }
+    
     public void setsizeX(int a){
 	this.imagesize[0] = a;
     }
@@ -70,7 +73,7 @@ public class BaseballCard implements Cloneable{
 	this.imagesize[1] = a;
     }
 
-    public Object clone(){
+    public Object clone()throws CloneNotSupportedException{
 	try{
 	    return super.clone();
 	}catch (CloneNotSupportedException ex){
