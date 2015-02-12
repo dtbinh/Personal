@@ -20,11 +20,12 @@ public class BaseballCard implements Cloneable{
 	this.imagesize = new int[2];
     }
 
-    public BaseballCard(String _name, String _manufacturer, int _year, double _price, int[] _imagesize){
+    public BaseballCard(String _name, String _manufacturer, int _year,
+			double _price, int[] _imagesize){
 	this.name = _name;
 	this.manufacturer = _manufacturer;
 	this.year = _year;
-	this.price = _year;
+	this.price = _price;
 	this.imagesize = _imagesize;
     }
 			
@@ -77,7 +78,7 @@ public class BaseballCard implements Cloneable{
 	try{
 	    return super.clone();
 	}catch (CloneNotSupportedException ex){
-		return null;
+	    throw ex;
 	}
     }
     
