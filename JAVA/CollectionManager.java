@@ -1,13 +1,24 @@
-//RONALD BALCHAND
-//109806273
-//CSE 214
-//ASSIGNMENT 1 PART C
+/**
+ *Ronald Balchand
+ *109806273
+ *Homework Assignment # 1
+ *CSE 214 Recitation Section 05
+ *Recitation TA: Vyassa Baratham
+ *Grading TA: Ke Ma
+ *@author Ronald
+ */
+
 import java.util.Scanner;
 
 public class CollectionManager{
 
     private static final String HEADER  = "# " + " Name" + String.format("%-18s","") + "Manufacturer" + "\t" + "Year" + "\t" + "Price"+"\t" + "Size\n";
-    
+
+    /**
+     *main console add method that takes all of the inputs from user input and adds them to a collection
+     *@param A One of the Colletions you can add to
+     *@param B One of the Colections you can add to
+     */
     public static  void consoleAdd(CardCollection A, CardCollection B){
 	Scanner scanner1 = new Scanner(System.in);
 	System.out.print("Enter the collection you wish to add to: ");
@@ -36,7 +47,11 @@ public class CollectionManager{
     }
     
     
-    
+    /**
+     *Helper method to get the desired card from the desired collection
+     *@param A One of the possible Collections
+     *@param B One of the possible Collections
+     */
     public static void consoleGet(CardCollection A, CardCollection B){
 	Scanner scanner2 = new Scanner(System.in);
 	System.out.print("Enter the collection you want to get the card from:");
@@ -55,6 +70,13 @@ public class CollectionManager{
     }
 
 
+    /**
+     * Copies a specific card from one Collection to the end of another
+     *@param a - The fist Card Collection
+     *@param b - The Card Collection you are copying to
+     *@param pos The Place your getting the Card copied from
+     *@param result The desired Collectionyou are copying from
+     */ 
 
     public static void copy(CardCollection a, CardCollection b, int pos, String result){
 	Scanner scanner4 = new Scanner(System.in);
