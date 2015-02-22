@@ -9,6 +9,7 @@ public class PerformanceList{
     private PerformanceNode tail;
     private PerformanceNode cursor;
     private int endTime;
+    private int size;
     
     /**
      *default constructor for the PerformanceList
@@ -24,6 +25,7 @@ public class PerformanceList{
 	this.cursor.setNext(null);
 	this.cursor.setPrevious(null);
 	this.endTime = 0;
+	this.size = 0;
     }
 
     /**
@@ -34,11 +36,16 @@ public class PerformanceList{
      *@param _endTime the new endTime for the new PerformanceList
      */ 
 
-    public PerformanceList(PerformanceNode _head, PerformanceNode _tail, PerformanceNode _cursor, int _endTime){
+    public PerformanceList(PerformanceNode _head, PerformanceNode _tail, PerformanceNode _cursor, int _endTime, int _size){
 	this.head = _head;
 	this.tail = _tail;
 	this.cursor = _cursor;
 	this.endTime = _endTime;
+	this.size = _size;
+    }
+
+    public int getSize(){
+	return this.size;
     }
 
     /**
@@ -46,50 +53,87 @@ public class PerformanceList{
      *@param newPerformance the new Performance to add to the end of the Performance List
      */
     public void addToEnd(PerformanceNode newPerformance){
-	if (endTime == 0){
+	if(this.head.getNext() == null){
+	    this.tail.setPrevious(newPerformance);
 	    this.head.setNext(newPerformance);
-	    this.tail.setPrevious(newPrevious);
-	    this.cursor.setNext(newPerformance);
-	    this.endTime += newPerformance.getDuration();
+	    newPerformance.setPrevious(this.head);
+	    newPerformance.setNext(this.tail);
+	    if(this.endTime + newPerformance.getDuration() >= 60){
+		this.endTime += (newPerformance.getDuration() + 40);
+	    }
+	    else{
+		this.endTime += newPerformance.getDuration();
+	    }
 	}
 	else{
-	    newPerformance.setNext(this.tail);
 	    this.tail.setPrevious(newPerformance);
-	    this.tail.getPrevious.setNext(newPerformance);
+	    newPerformance.setPrevious(this.tail.getPrevious());
+	    this.tail.getPrevious().setNext(newPerformance);
+	    newPerformance.setNext(this.tail);
+	    if(this.endTime + newPerformance.getDuration() >= 60){
+		this.endTime += (newPerformance.getDuration() + 40);
+	    }
+	    else{
+		this.endTime += newPerformance.getDuration();
+	    }
 	}
+	this.size++;
     }
 
+	    
+
+	
+    public void printAll(){
+	this.cursor = (this.head.getNext());
+	while(cursor != null){
+	    System.out.println(this.cursor);
+	    this.cursor = (this.cursor.getNext());
+	}
+    }
+    
     /**
      *adds a new Performance after the current node and the current node becomes the newly added node
      /*
      *@param newPerformance the New Performance to add to the Performance List
 in the current place
     */
-    public void addAfterCurrent(PerformanceNode newPerformance){
+    //    public void addAfterCurrent(PerformanceNode newPerformance){
 	
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static void main(String [] args){
+	PerformanceNode a = new PerformanceNode("Hardwell", "Hardwell", 1, 60, 0, null, null);
+	PerformanceNode c = new PerformanceNode("Tiesto", "Tiesto", 1, 60, 0, null,null);
+	PerformanceList b = new PerformanceList();
+	b.addToEnd(a);
+	b.addToEnd(c);
+	System.out.println(b.getSize());
+	//b.printAll();
+	System.out.println(b.head.getNext().getNext());
+	//System.out.println(b.tail.getPrevious());
+	//System.out.println(b.endTime);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

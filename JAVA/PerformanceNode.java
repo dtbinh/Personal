@@ -25,7 +25,7 @@ public class PerformanceNode{
 	this.duration = 0;
 	this.time = 0;
 	this.next = null;
-	this.previous = null
+	this.previous = null;
     }
 
     /**
@@ -37,21 +37,21 @@ public class PerformanceNode{
      *@param _next The next Performance in the Festival 
      *@param _previous The previous Performance in the Festival
      */
-    public PerformanceNode(String _name, String _leadPerformer, int _totalParticipants, int _duration, int _time, PerformanceNode _next, PerforanceNode _previous){
-	this.name = _name;
+    public PerformanceNode(String _name, String _leadPerformer, int _totalParticipants, int _duration, int _time, PerformanceNode _next, PerformanceNode _previous){
+	this.performanceName = _name;
 	this.leadPerformer = _leadPerformer;
 	this.totalParticipants = _totalParticipants;
 	this.duration = _duration;
 	this.time = _time;
 	this.next = _next;
-	this.previous = _previous
+	this.previous = _previous;
     }
     /**
      *returns the name of the Performance
      *@return the name of the Performace as a String
      */
     public String getName(){
-	return this.name;
+	return this.performanceName;
     }
     /**
      *returns the name of the lead Performer of this Performance
@@ -94,7 +94,7 @@ public class PerformanceNode{
      *@return the previous Performance in this festival
      */
 
-    public PerformanceaNode getPrevious(){
+    public PerformanceNode getPrevious(){
 	return this.previous;
     }
 
@@ -103,7 +103,7 @@ public class PerformanceNode{
      *@param a A new String for the name of the Performance
      */
     public void setName(String a){
-	this.name = a;
+	this.performanceName = a;
     }
 
     /** 
@@ -160,6 +160,7 @@ public class PerformanceNode{
     public String toString(){
 	String ans = "";
 	ans += this.getName() + "\t" + this.getleadPerformer() + "\t\t" + this.gettotalParticipants() + "\t" + this.getDuration() + "\t" + this.getTime();
+	return ans;
     }
 	
 }
