@@ -1,7 +1,11 @@
 /**
  *Ronald Balchand
  *109806273
- *CSE 214 Assignment #2
+ * Assignment #2
+ * CSE 214 Recitation Section 05
+ * Recitation TA: Vyassa Baratham
+ * Grading TA: Ke Ma
+ * @author Ronald
  */
 
 public class PerformanceNode{
@@ -32,8 +36,9 @@ public class PerformanceNode{
      *Constructor for the Performance Node that includes parameters
      *@param _name The name of the Performance
      *@param _leadPerformer The name of the lead Performer
+     *@param _totalParticipants The total number of Participants in this Performance
      *@param _duration The duration of the Performace (in minutes)
-     *@param _name The start time of the Performance (in minutes)
+     *@param _time The start time of the Performance (in minutes)
      *@param _next The next Performance in the Festival 
      *@param _previous The previous Performance in the Festival
      */
@@ -158,9 +163,7 @@ public class PerformanceNode{
     }
 
     public String toString(){
-	String ans = "";
-	ans += this.getName() + "\t" + this.getleadPerformer() + "\t\t" + this.gettotalParticipants() + "\t" + this.getDuration() + "\t" + this.getTime();
-	return ans;
+	String ans = "%1$-30s%2$20s%3$13s%4$10s%5$12s\n";
+	return String.format(ans, this.getName(),this.getleadPerformer(), this.gettotalParticipants(), this.getDuration(), this.getTime());
     }
-	
 }
