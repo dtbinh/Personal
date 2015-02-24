@@ -35,8 +35,57 @@ public class PerformanceScheduler{
 		break;
 	    }
 
-	    if(input.equals(
-	}
-    }
+	    if(input.equals("A") || input.equals("a")){
+		System.out.print("Enter name of Performance: ");
+		String name = scanner.nextLine();
+		name += scanner.nextLine();
+		System.out.print("Enter name of lead performer: ");
+		String leader = scanner.nextLine();
+		System.out.print("Enter the total participants: ");
+		int total = scanner.nextInt();
+		System.out.print("Enter the duration of the performance: ");
+		int duration = scanner.nextInt();
+		PerformanceNode newNode = new PerformanceNode(name, leader, total, duration, 0, null, null);
+		list.addToEnd(newNode);
+		System.out.println("\nNew performance " + name + " is added to the end of the list. \n" );
+	    }
+
+	    if(input.equals("D") ||input.equals("d")){
+		System.out.println("Schedule:\n");
+		System.out.println(list);
+	    }
+
+	    if(input.equals("I") || input.equals("i")){
+		System.out.print("Enter name of Performance: ");
+		String name = scanner.nextLine();
+		name += scanner.nextLine();
+		System.out.print("Enter name of lead performer: ");
+		String leader = scanner.nextLine();
+		System.out.print("Enter the total participants: ");
+		int total = scanner.nextInt();
+		System.out.print("Enter the duration of the performance: ");
+		int duration = scanner.nextInt();
+		PerformanceNode newNode = new PerformanceNode(name, leader, total, duration, 0, null, null);
+		list.addAfterCurrent(newNode);
+		System.out.println("\nNew performance " + name + " is added after the current Performance. \n" );
+	    }
+
+	    if(input.equals("B")||input.equals("b")){
+		list.moveCursorBackward();
+		System.out.println("Cursor has been moved Backwards.");
+	    }
+
+	    if(input.equals("C")||input.equals("c")){
+		list.displayCurrentPerformance();
+	    }
+	    if(input.equals("F") || input.equals("f")){
+		list.moveCursorForward();
+		System.out.println("Cursor has been moved Forwards. ");
+	    }
+	}	
+    }   
+	    
 	
+    
+    
 }
