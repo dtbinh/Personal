@@ -5,7 +5,7 @@
  * CSE 214 Recitation Section 05
  * Recitation TA: Vyassa Baratham
  * Grading TA : Ke Ma
- * @author
+ * @author Ronald Balchand
  */
 import java.util.Scanner;
 
@@ -72,7 +72,6 @@ public class PerformanceScheduler{
 
 	    if(input.equals("B")||input.equals("b")){
 		list.moveCursorBackward();
-		System.out.println("Cursor has been moved Backwards.");
 	    }
 
 	    if(input.equals("C")||input.equals("c")){
@@ -80,8 +79,18 @@ public class PerformanceScheduler{
 	    }
 	    if(input.equals("F") || input.equals("f")){
 		list.moveCursorForward();
-		System.out.println("Cursor has been moved Forwards. ");
+		
 	    }
+	    if(input.equals("J") || input.equals("j")){
+		System.out.print("Enter the Position: ");
+		int a = scanner.nextInt();
+		list.jumpToPosition(a);
+		//	System.out.println("The Cursor has now been moved to position " + a);
+	    }
+	    if(input.equals("R") || input.equals("r")){
+		list.removeCurrentNode();
+	    }
+	    
 	}	
     }   
 	    

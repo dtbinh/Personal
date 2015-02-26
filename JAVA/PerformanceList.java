@@ -49,8 +49,19 @@ public class PerformanceList{
 	this.size = _size;
     }
 
+    /**
+     *returns the size of the Performance List
+     *@return the size of the Performance List
+     */
     public int getSize(){
 	return this.size;
+    }
+    /**
+     *returns the current cursor Node
+     *@return the node that the cursor is pointing to
+     */
+    public PerformanceNode getCursor(){
+	return this.cursor;
     }
 
     /**
@@ -107,7 +118,7 @@ public class PerformanceList{
 	}
 	    
 	if(this.size == 0){
-	    ans = "Current Node is Null and Performance List is Empty";
+	    ans = "\nCurrent Node is Null and Performance List is Empty\n";
 	}
 	return ans;
     }
@@ -118,7 +129,7 @@ public class PerformanceList{
 in the current place
     */
     public void addAfterCurrent(PerformanceNode newPerformance){
-	if(this.cursor.getNext().getNext() == this.tail){
+	if(this.cursor.getNext() == this.tail){
 	    this.addToEnd(newPerformance);
 	}
 	if(this.cursor.getNext() == this.head){
@@ -129,6 +140,9 @@ in the current place
 	    this.cursor.getNext().getNext().setPrevious(newPerformance);
 	    newPerformance.setPrevious(this.cursor.getNext());
 	    this.cursor.getNext().setNext(newPerformance);
+	    this.cursor.setNext(newPerformance);
+	    this.cursor.setPrevious(newPerformance.getPrevious());
+	    
 
 	    //Reset Times
 	    this.resetTime();
@@ -158,18 +172,20 @@ in the current place
      */
     public boolean moveCursorBackward() throws NullPointerException{
 	if (this.cursor.getNext() == null){
-	    throw new NullPointerException("There is no Cursor");
+	    throw new NullPointerException("\nThere Is No Cursor\n");
 	}
 
 	boolean ans = true;
 	
-	if(this.cursor.getPrevious() == this.head){
+	if(this.cursor.getPrevious() == null){
 	    ans = false;
+	    System.out.println("\nThe Cursor is at the beginning of the List\n");
 	    return ans;
 	}
 	else{
 	    this.cursor.setNext(this.cursor.getPrevious());
 	    this.cursor.setPrevious(this.cursor.getPrevious().getPrevious());
+	    System.out.println("\nCursor moved Backwards\n");
 	    return ans;
 	}
     }
@@ -182,22 +198,32 @@ in the current place
      */
     public boolean moveCursorForward() throws NullPointerException{
 	if(this.cursor.getNext() == null){
-	    throw new NullPointerException("There is no Cursor");
+	    throw new NullPointerException("\nThere is no Cursor\n");
 	}
 	boolean ans = true;
-	if(this.cursor.getNext().getNext() == this.tail){
-	    ans = false;
+
+	if(this.cursor.getNext().getNext().getNext() == null){
+	    System.out.println("\nThe Cursor is already at the last Position\n");
 	    return ans;
 	}
 	else{	
 	    this.cursor.setPrevious(this.cursor.getNext());
 	    this.cursor.setNext(this.cursor.getNext().getNext());
+	    System.out.println("\nCursor moved Forward\n");
 	    return ans;
 	}
     }
 
     public void displayCurrentPerformance(){
-	System.out.println(this.cursor.getNext());
+	if(this.cursor.getNext() == null){
+	    System.out.println("\nThere is no Cursor\n");
+	}
+	else{
+	    System.out.println("\nCurrent Performance: \n------------------------------------------------------------------------------------------");
+	    String header = "%1$-30s%2$-20s%3$-5s%4$-5s%5$-10s\n";
+	    System.out.println( String.format(header,"Performance Name","Lead Performer Name"," Participants "," Duration "," Start Time ") + "\n");
+	    System.out.println(this.cursor.getNext());
+	}
     }
 
     /**
@@ -208,6 +234,7 @@ in the current place
     public boolean jumpToPosition(int a){
 	boolean ans = true;
 	if(a > this.size){
+	    System.out.println("\nThe Position You entered Is not available\n");
 	    ans = false;
 	    return false;
 	}
@@ -219,6 +246,7 @@ in the current place
 		this.cursor.setPrevious(this.cursor.getNext().getPrevious());
 		i++;
 	    }
+	    System.out.println("The Cursor has now been moved to position " + a);
 	    return ans;
 	}
     }
@@ -231,27 +259,42 @@ in the current place
 	boolean ans = true;
 	if(this.size == 0){
 	    ans = false;
+	    System.out.println("\nThere is no current Performance To Remove\n");
+	    return ans;
+	}
+
+	if(this.cursor.getNext() == null){
+	    System.out.println("\nThere is no Cursor and no current Performance to Remove\n");
+	    ans = false;
 	    return ans;
 	}
 
 	if(this.size == 1){
+	    String a = this.getCursor().getNext().getName();  
 	    this.head.setNext(null);
 	    this.cursor.setPrevious(null);
 	    this.cursor.setNext(this.head);
 	    this.size--;
+	    System.out.println("Performance " + a + " has been removed from this Performance List");
 	    return ans;
 	}
 	
 	if(this.cursor.getPrevious() == null){
+	    String a = this.getCursor().getNext().getName();
+	    System.out.println("Performance " + a + " has been removed from this Performance List");
+	    
 	    this.head.setNext(this.cursor.getNext().getNext());
 	    this.cursor.getNext().getNext().setPrevious(this.head);
 	    this.cursor.setNext(this.head.getNext());
+	    this.head.getNext().setTime(0);
 	    this.resetTime();
 	    this.size--;
 	    return ans;
 	}
 
 	if(this.cursor.getNext().getNext() == this.tail){
+	    String a = this.getCursor().getNext().getName();
+	    System.out.println("Performance " + a + " has been removed from this Performance List");
 	    this.tail.setPrevious(this.cursor.getPrevious());
 	    this.cursor.setNext(this.cursor.getPrevious());
 	    this.cursor.getPrevious().setNext(this.tail);
@@ -261,6 +304,9 @@ in the current place
 	    return ans;
 	}
 	else{
+	    String a = this.getCursor().getNext().getName();
+	    System.out.println("Performance " + a + " has been removed from this Performance List");
+	    
 	    this.cursor.getPrevious().setNext(this.cursor.getNext().getNext());
 	    this.cursor.getNext().getNext().setPrevious(this.cursor.getPrevious());
 	    this.cursor.setNext(this.cursor.getPrevious());
@@ -268,56 +314,8 @@ in the current place
 	    this.resetTime();
 	    this.size--;
 	    return ans;
-	}
-
-	
-    }
-	    
-	
-	
-    
-
-    public static void main(String [] args){
-	PerformanceNode a = new PerformanceNode("Hardwell", "Hardwell", 1, 60, 0, null, null);
-	PerformanceNode c = new PerformanceNode("Tiesto", "Tiesto", 1, 60, 0, null,null);
-	PerformanceNode b = new PerformanceNode("Dimitri Vegas and Like Mike","Like Mike", 2, 60,0,null,null);
-	PerformanceNode f = new PerformanceNode("Nicky Romero", "Nicky Romero", 1, 30, 0, null, null);
-	PerformanceList h = new PerformanceList();
-	h.addToEnd(a);
-	System.out.println("\n\n");
-	h.addToEnd(c);
-      	h.addToEnd(b);
-	PerformanceNode d = new PerformanceNode("Avicii", "Avicii", 1, 45, 0, null, null);
-	PerformanceList g = new PerformanceList();
-	//g.addToEnd(d);
-	//System.out.println(g.moveCursorBackward());
-	System.out.println(h);
-	h.jumpToPosition(2);
-	h.addAfterCurrent(d);
-	System.out.println(h);
-	h.removeCurrentNode();
-	System.out.println(h);
-	h.moveCursorForward();
-	h.removeCurrentNode();
-	System.out.println(h);
-	h.jumpToPosition(1);
-	h.addAfterCurrent(c);
-	System.out.println(h);
-	h.removeCurrentNode();
-	System.out.println(h);
-	h.moveCursorForward();
-	h.removeCurrentNode();
-	System.out.println(h);
-	h.displayCurrentPerformance();
-	//h.removeCurrentNode();
-	System.out.println(h.size);
-	h.removeCurrentNode();
-	System.out.println(h.size);
-	System.out.println(h);
-	h.addAfterCurrent(a);
-	System.out.println(h);
-    }
-    
+	}	
+    }   
 }
 
 
