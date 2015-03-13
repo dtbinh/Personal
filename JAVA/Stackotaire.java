@@ -124,7 +124,7 @@ public class Stackotaire{
 	    System.out.print("         W1 ");
 	}
 	if(this.waste.isEmpty() == false){
-	    System.out.print("        ");
+	    System.out.print("        W1  ");
 	    this.waste.printStack();
 	    System.out.print(" ");
 	}
@@ -233,8 +233,60 @@ public class Stackotaire{
 	}
     }
 
+    //WASTE FOUNDATION
+    //WASTE TABLE
+    //FOUNDATION TABLE
+    //TABLE FOUNDATION
+    //TABLE WASTE
 
-    public void Move(String a, String b, int c, int d){
+    
+    public void Move1(String a, String b, int d){
+	if((a == "waste") && (b == "foundation")){
+	    if(this.waste.isEmpty()){
+		System.out.println("Bruh the Waste stack is empty");
+		break;
+	    }
+	    if(this.foundations[d - 1].isEmpty() == true){//empty
+		Card temp1 = (Card)(this.waste.peek());
+		if(temp1.getSuit() == 'A'){
+		    this.foundations[d - 1].push(this.waste.pop());
+		}
+		else{
+		    System.out.println("You cannot put start a foundation stack without the A");
+		    break;
+		}
+	    }
+	    else{
+		//not empty
+		Card temp2 = (Card)(this.waste.peek());//Card you tryna add
+		Card temp3 = (Card)(this.foundations[d - 1].peek());//Card on the top of the foundation, 
+		if( (temp2.getSuit() == temp3.getSuit()) && (temp2.isRed() == temp3.isRed()) &&((temp2.getValue() - 1) == temp3.getValue())){
+		    this.foundations[d - 1].push(this.waste.pop());
+		}
+		else{
+		    System.out.println("You cannot add that card to that foundation");
+		}
+	    }
+	}
+
+	if((a == "waste") && (b == "table")){
+	    if(this.waste.isEmpty()){
+		System.out.println("The Waste Stack is empty");
+		break;
+	    }
+	    if(this.tableaus[d - 1].isEmpty() == true){//empty
+		Card temp4 = (Card)(this.waste.peek());
+		if(temp
+
+
+
+	    
+	      
+
+
+
+
+	}
     }
 	
 
