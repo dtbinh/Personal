@@ -12,12 +12,104 @@
 
 public class Passenger{
 
+    private int size;
+    private String destination;
+    private int timeArrived;
+    private int timeWaiting;
+
+    /**
+     *Default constructor for the Passenger class
+     */
+    
+    public Passenger(){
+	this.size = 0;
+	this.destination = "";
+	this.timeArrived = 0;
+	this.timeWaiting = 0;
+    }
 
 
+    /**
+     *Overrridden Constructor for the Passenger class
+     *@param _size The size of the Passenger. size greater than one indicates a group
+     *@param _destination The Destination of the Passenger
+     *@param _timeArrived The time the Passenger arrived at the Bus Stop
+     *@param _timeWaiting the time the Passenger was waiting
+     */
 
+    public Passeneger(int _size, String _destination, int _timeArrived, int _timeWaiting){
 
+	this.size = _size;
+	this.destination = _destination;
+	this.timeArrived = _timeArrived;
+	this.timeWaiting = _timeWaiting;
+    }
 
+    /**
+     *Set method for the size 
+     *@param _size The new Size of the Passenger 
+     */
+    public void setSize(int _size){
+	this.size = _size;
+    }
 
+    /**
+     *Set method for the destination
+     *@param _destination The new Destination of the Passenger
+     */
+    public void setDestination(String _destination){
+	this.destination = _destination;
+    }
+
+    /**
+     *Set method for the timeArrived
+     *@param _timeArrived The new timeArrived of the Passenger
+     */
+    public void setTimeArrived(int _timeArrived){
+	this.timeArrived =_timeArrived;
+    }
+
+    /**
+     *Set method for the timeWaiting
+     *@param _timeWaiting The new timeWaiting of the Passenger
+     */
+    public void setTimeWaiting(int _timeWaiting){
+	this.timeWaiting = _timeWaiting;
+    }
+    
+    /**
+     *get method for the size of the Passenger
+     *@return the Size of the Passenger
+     */ 
+    public int getSize(){
+	return this.size;
+    }
+
+    /**
+     *get method for the destination for the Passenger
+     *@return String the destination for the Passenger
+     */
+    public String getPassenger(){
+	return this.passenger;
+    }
+
+    /**
+     *get method for the timeArrived for the Passenger
+     *@return int the timeArrived for the Passenger
+     */
+    public int getTimeArrived(){
+	return this.timeArrived;
+    }
+
+    /**
+     *get method for the timeWaiting for the Passenger
+     *@return int the timeWaiting for the Passenger
+     */
+    public int getTimeWaiting(){
+	return this.timeWaiting;
+    }
+
+}
 
 
 
