@@ -37,7 +37,7 @@ public class Passenger{
      *@param _timeWaiting the time the Passenger was waiting
      */
 
-    public Passeneger(int _size, String _destination, int _timeArrived, int _timeWaiting){
+    public Passenger(int _size, String _destination, int _timeArrived, int _timeWaiting){
 
 	this.size = _size;
 	this.destination = _destination;
@@ -89,8 +89,8 @@ public class Passenger{
      *get method for the destination for the Passenger
      *@return String the destination for the Passenger
      */
-    public String getPassenger(){
-	return this.passenger;
+    public String getDestination(){
+	return this.destination;
     }
 
     /**
@@ -137,4 +137,4 @@ public class Passenger{
 
 
 
-}
+
