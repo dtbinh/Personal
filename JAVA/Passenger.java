@@ -10,7 +10,7 @@
 
 
 
-public class Passenger{
+public class Passenger implements Comparable{
 
     private int size;
     private String destination;
@@ -100,6 +100,40 @@ public class Passenger{
     public int getTimeArrived(){
 	return this.timeArrived;
     }
+
+    public String toString(){
+	return this.getDestination();
+    }
+
+
+
+    public boolean equals(Object object){
+	if(object instanceof Passenger &&((((Passenger)object).getSize()) == this.getSize())){
+	    return true;
+	}
+	else{
+	    return false;
+	}
+    }
+    
+	    
+    public int compareTo(Object a){
+	int ans = 2;
+	if(a instanceof Passenger){
+	    Passenger c = (Passenger)a;
+	    if(this.equals(c)){
+		ans = 0;
+	    }
+	    else if(this.getSize() > c.getSize()){
+		ans = 1;
+	    }
+	    else{
+		ans = -1;
+	    }
+	}
+	return ans;
+    }
+	
 
     /**
      *get method for the timeWaiting for the Passenger
