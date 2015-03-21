@@ -12,17 +12,18 @@
 
 public class Passenger implements Comparable{
 
-    private int size;
+    private int amount;
     private String destination;
     private int timeArrived;
     private int timeWaiting;
-
+    final String [] stops = {"South P", "West", "SAC","Chapin","South P", "PathMart", "Walmart", "Target"};
+	
     /**
      *Default constructor for the Passenger class
      */
     
     public Passenger(){
-	this.size = 0;
+	this.amount = 0;
 	this.destination = "";
 	this.timeArrived = 0;
 	this.timeWaiting = 0;
@@ -31,15 +32,15 @@ public class Passenger implements Comparable{
 
     /**
      *Overrridden Constructor for the Passenger class
-     *@param _size The size of the Passenger. size greater than one indicates a group
+     *@param _amount The amount of the Passenger. size greater than one indicates a group
      *@param _destination The Destination of the Passenger
      *@param _timeArrived The time the Passenger arrived at the Bus Stop
      *@param _timeWaiting the time the Passenger was waiting
      */
 
-    public Passenger(int _size, String _destination, int _timeArrived, int _timeWaiting){
+    public Passenger(int _amount, String _destination, int _timeArrived, int _timeWaiting){
 
-	this.size = _size;
+	this.amount = _amount;
 	this.destination = _destination;
 	this.timeArrived = _timeArrived;
 	this.timeWaiting = _timeWaiting;
@@ -47,10 +48,10 @@ public class Passenger implements Comparable{
 
     /**
      *Set method for the size 
-     *@param _size The new Size of the Passenger 
+     *@param _amount The new Size of the Passenger 
      */
-    public void setSize(int _size){
-	this.size = _size;
+    public void setAmount(int _amount){
+	this.amount = _amount;
     }
 
     /**
@@ -81,8 +82,8 @@ public class Passenger implements Comparable{
      *get method for the size of the Passenger
      *@return the Size of the Passenger
      */ 
-    public int getSize(){
-	return this.size;
+    public int getAmount(){
+	return this.amount;
     }
 
     /**
@@ -101,14 +102,56 @@ public class Passenger implements Comparable{
 	return this.timeArrived;
     }
 
+    
+
+    /**
+     *gets the number of the stop the Passenger group is Going to in a list of all the stops, including inner and outer
+     *@return int the number of the Stop that the Passenger is going to
+     */
+    public int getNumDest(){
+	String stop = this.getDestination();
+	int ans = 0;
+	for(int i = 0; i < this.stops.length; i++){
+	    if(stop == this.stops[i]){
+		ans = i;
+	    }
+	}
+	return ans;
+    }
+    
+
+    /**
+     *returns a String indicating whether or not a Passenger is headed towards an outer Loop or Inner Loop Stop
+     *@return String Inner or Outer Destination
+     */
+    public String innerOrOuter(){
+	String ans = "";
+	int dest = this.getNumDest();
+	if(dest <= 3){
+	    ans = "Inner";
+	}
+	else{
+	    ans = "Outer";
+	}
+	return ans;
+    }
+
+    /**
+     *Overidden toString method 
+     *@return String the String form of the Passenger
+     */
     public String toString(){
-	return this.getDestination();
+	return "[ " + this.getAmount() + ", " + this.getNumDest() + " (" + this.getDestination() + ") , " + this.getTimeArrived() + "]";
     }
 
 
-
+    /**
+     *Overridden equals method for Passenger
+     *@param object the object that the current Passenger is being compared to  
+     *@return boolean true if the object is equal to the current one
+     */ 
     public boolean equals(Object object){
-	if(object instanceof Passenger &&((((Passenger)object).getSize()) == this.getSize())){
+	if(object instanceof Passenger &&((((Passenger)object).getAmount()) == this.getAmount()) &&((((Passenger)object).getDestination()) == this.getDestination())){
 	    return true;
 	}
 	else{
@@ -116,7 +159,11 @@ public class Passenger implements Comparable{
 	}
     }
     
-	    
+    /**
+     *Overridden compareTo method for the passenger class
+     *@param a the object the current Passenger is being compared to
+     *@return int the value of the return of the compareTo method
+     */	    
     public int compareTo(Object a){
 	int ans = 2;
 	if(a instanceof Passenger){
@@ -124,7 +171,7 @@ public class Passenger implements Comparable{
 	    if(this.equals(c)){
 		ans = 0;
 	    }
-	    else if(this.getSize() > c.getSize()){
+	    else if(this.getAmount() > c.getAmount()){
 		ans = 1;
 	    }
 	    else{
