@@ -30,6 +30,7 @@ public class Simulator{
 
     
     int groupsServed;
+    int groupsSetsServed;
     int totalTimeWaited;
 
     
@@ -46,6 +47,9 @@ public class Simulator{
      *@param _duration theamount of minutes the simulation lasts
      */
     public Simulator(int _numInBuses, int _numOutBuses, int _minGroupSize, int _maxGroupSize, double _arrivalProb, int _busCapacity, int _duration){
+	this.groupsServed  = 0;
+	this.totalTimeWaited = 0;
+	this.groupsSetsServed = 0;
 	this.numInBuses = _numInBuses;
 	this.numOutBuses = _numOutBuses;
 	this.minGroupSize = _minGroupSize;
@@ -155,16 +159,25 @@ public class Simulator{
     public void setTotalTimeWaited(int a){
 	this.totalTimeWaited = a;
     }
+    /**
+     *get method for the amount of groups tha have been Served
+     *@return int the amount of groups that have been served
+     */
+    public int getSetsServed(){
+	return this.groupsSetsServed;
+    }
 
     /**
      *Method that calculates the Average wait time for each passenger
      *@return double the Average Wait time
+
      */
     
     public double averageWaitTime(){
 	double a = (double)this.getGroupsServed();
+	double c = (double)this.getSetsServed();
 	double b = (double)this.getTotalTimeWaited();
-	return a/b;
+	return b/c;
     }
 
 
@@ -179,7 +192,10 @@ public class Simulator{
 	    
 	    if(this.innerBuses[i1].isActive() == false){
 		this.innerBuses[i1].setTimeToRest(this.innerBuses[i1].getTimeToRest() - 1);//RESTING BUSES
-		System.out.println("In Route Bus " + (i1 + 1) + " waiting at South P for " + this.innerBuses[i1].getTimeToRest() + " minutes. "); 
+		if(this.innerBuses[i1].isActive() == false){
+		    System.out.println("In Route Bus " + (i1 + 1) + " waiting at South P for " + this.innerBuses[i1].getTimeToRest() + " minutes. "); 
+		}
+
 	    }
 	    
 	    if(this.innerBuses[i1].isActive() == true){
@@ -187,37 +203,65 @@ public class Simulator{
 		    this.innerBuses[i1].setToNextStop(this.innerBuses[i1].getToNextStop() - 1);
 		    
 		}
+		
 		    
 		if(this.innerBuses[i1].getToNextStop() > 0){
 		    System.out.println("In Route Bus " + (i1 + 1) + " moving towards " + this.innerBuses[i1].getNextStop() + " . Arrives in " + this.innerBuses[i1].getToNextStop() + " minutes.");//MOVING BUSES
 		}
 
+		
+
 		else if(innerBuses[i1].getToNextStop() == 0){
+
 		    String name = this.innerBuses[i1].getNextStop();
 		    int num = this.getInnerStopNumber(name);
-		    int [] result = this.unloadAndLoad(this.innerBuses[i1],this.innerRouteLines[num]);
-		    int dropped = result[0];
-		    int pickedUp = result[1];
-		    int time = result[2];
-		    this.groupsServed += pickedUp;
-		    this.totalTimeWaited += time;
-		    System.out.print("In Route Bus " + (i1 + 1) +" arrives at " + this.innerBuses[i1].getNextStop() + " .");
-		    if(dropped > 0){
-			System.out.print("Drops off " + dropped + " passengers. ");
-		    }
-		    if(pickedUp > 0){
-			System.out.print("Picks Up " + pickedUp + " passengers. ");
-		    }
-		    System.out.println();
-
 		    if(num == 3){
-			this.innerBuses[i1].setNextStop(this.inRouteNames[0]);
-			this.innerBuses[i1].setToNextStop(20);
+			System.out.print("In Route Bus " + (i1 + 1) + " arrives at South P. ");
+			int [] result = (this.innerBuses[i1]).unload("South P");
+			
+			int oneDrop = result[0];
+			int oneWait = result[1];
+			if(oneDrop > 0){
+			    System.out.print("Drops off "  + oneDrop + " passengers.");
+			    this.innerBuses[i1].setNextStop(this.inRouteNames[0]);
+			    this.innerBuses[i1].setToNextStop(1);
+			    this.innerBuses[i1].setTimeToRest(30);
+			    System.out.println();
+			    this.groupsServed += oneDrop;
+			    this.totalTimeWaited += oneWait;
+			}
+			if(oneDrop == 0){
+			    this.innerBuses[i1].setNextStop(this.inRouteNames[0]);
+			    this.innerBuses[i1].setToNextStop(1);
+			    this.innerBuses[i1].setTimeToRest(30);
+			    System.out.println();
+			}
 		    }
-		
-		    if(num < 3){
-			this.innerBuses[i1].setNextStop(this.inRouteNames[num + 1]);
-			this.innerBuses[i1].setToNextStop(20);
+			    
+		    
+		    else{
+			int [] result2 = this.unloadAndLoad(this.innerBuses[i1],this.innerRouteLines[num]);
+			int dropped = result2[0];
+			int pickedUp = result2[1];
+			int time = result2[2];
+			int groups = result2[3];
+			this.groupsServed += pickedUp;
+			this.totalTimeWaited += time;
+			this.groupsSetsServed += groups;
+			System.out.println(time);
+			System.out.print("In Route Bus " + (i1 + 1) +" arrives at " + this.innerBuses[i1].getNextStop() + " .");
+			if(dropped > 0){
+			    System.out.print("Drops off " + dropped + " passengers. ");
+			}
+			if(pickedUp > 0){
+			    System.out.print("Picks Up " + pickedUp + " passengers. ");
+			}	
+			
+			if(num < 3){
+			    this.innerBuses[i1].setNextStop(this.inRouteNames[num + 1]);
+			    this.innerBuses[i1].setToNextStop(20);
+			}
+			System.out.println();
 		    }
 		}
 	    }
@@ -227,13 +271,17 @@ public class Simulator{
 
 	for(int i2 = 0; i2 < this.outerBuses.length; i2++){
 	    if(this.outerBuses[i2].isActive() == false){
-		this.outerBuses[i2].setTimeToRest(this.innerBuses[i2].getTimeToRest() - 1);
-		System.out.println("Out Route Bus " + (i2 + 1) + " waiting at South P for " + this.outerBuses[i2].getTimeToRest() + " minutes. ");
+		this.outerBuses[i2].setTimeToRest(this.outerBuses[i2].getTimeToRest() - 1);
+	    
+		if(this.outerBuses[i2].isActive() == false){
+		    System.out.println("Out Route Bus " + (i2 + 1) + " waiting at South P for " + this.outerBuses[i2].getTimeToRest() + " minutes. ");
+		}
 	    }
 	    
 	    if(this.outerBuses[i2].isActive() == true){
 		if(this.outerBuses[i2].inTransit()){
 		    this.outerBuses[i2].setToNextStop(this.outerBuses[i2].getToNextStop() - 1);
+		    
 		}
 
 		if(this.outerBuses[i2].getToNextStop() > 0){
@@ -243,32 +291,57 @@ public class Simulator{
 		else if(outerBuses[i2].getToNextStop() == 0){
 		    String name2 = this.outerBuses[i2].getNextStop();
 		    int num2 = this.getOuterStopNumber(name2);
-		    int [] result2 = this.unloadAndLoad(this.outerBuses[i2], this.outerRouteLines[num2]);
-		    int dropped2 = result2[0];
-		    int pickedUp2 = result2[1];
-		    int time2 = result2[2];
-		    this.groupsServed += pickedUp2;
-		    this.totalTimeWaited += time2;
-		    System.out.print(" Out Route Bus " + (i2 + 1) + " arrives at " + this.outerBuses[i2].getNextStop() + " . ");
-		    if(dropped2 > 0){
-			System.out.print("Drops off " + dropped2 + " passengers. ");
+		    if(num2 == 3){
+			System.out.print("Out Route Bus " + (i2 +1) + " arrives at South P. ");
+			int result3[] = (this.innerBuses[i2]).unload("South P");
+			int oneDrop3 = result3[0];
+			int oneWait3 = result3[1];
+			if(oneDrop3 > 0){
+			    System.out.print("Drops off " + oneDrop3 + " passengers. ");
+			    this.outerBuses[i2].setNextStop(this.outRouteNames[0]);
+			    this.outerBuses[i2].setToNextStop(1);
+			    this.outerBuses[i2].setTimeToRest(30);
+			    System.out.println();
+			    this.groupsServed += oneDrop3;
+			    this.totalTimeWaited += oneWait3;
+			}
+			if(oneDrop3 == 0){
+			    this.outerBuses[i2].setNextStop(this.outRouteNames[0]);
+			    this.outerBuses[i2].setToNextStop(1);
+			    this.outerBuses[i2].setTimeToRest(30);
+			    System.out.println();
+			}
 		    }
-		    if(pickedUp2 > 0){
-			System.out.print("Picks Up " + pickedUp2 + " passengers. ");
-		    }
-		    System.out.println();
-		    if(num2 == 4){
-			this.outerBuses[i2].setNextStop(this.outRouteNames[0]);
-			this.outerBuses[i2].setToNextStop(20);
-		    }
-		    if(num2 < 4){
-			this.outerBuses[i2].setNextStop(this.outRouteNames[num2 + 1]);
-			this.outerBuses[i2].setToNextStop(20);
+		    else{
+			
+			int [] result4 = this.unloadAndLoad(this.outerBuses[i2], this.outerRouteLines[num2]);
+			int dropped4 = result4[0];
+			int pickedUp4 = result4[1];
+			int time4 = result4[2];
+			int groups4 = result4[3];
+			this.groupsSetsServed += groups4;
+			this.groupsServed += pickedUp4;
+			this.totalTimeWaited += time4;
+			System.out.print("Out Route Bus " + (i2 + 1) + " arrives at" + this.outerBuses[i2].getNextStop() + ". ");
+			if(dropped4 > 0){
+			    System.out.print("Drops off " + dropped4 + " passengers. ");
+			}
+			if(pickedUp4 > 0){
+			    System.out.print("Picks Up " + pickedUp4 + " passengers. ");
+			}
+			if(num2 < 3){
+			    this.outerBuses[i2].setNextStop(this.outRouteNames[num2 + 1]);
+			    this.outerBuses[i2].setToNextStop(20);
+			}
+			System.out.println();
+			
 		    }
 		}
 	    }
+	    
 	}
     }
+    
 
     
 
@@ -437,25 +510,27 @@ public class Simulator{
      */
     public void assignPassengers(int currentMinute){
 	for(int i1 = 0; i1 < this.innerRouteLines.length; i1++){
+	    this.innerRouteLines[i1].passengerWait();
 	    double _indicate = this.getProb();
 	    
 	    if(this.arrivalProb(_indicate) == true){
 		int passengerSize = this.randomSize();
 		String passengerDest = randomInnerStop(i1);
 		int timeArrive = currentMinute;
-		Passenger dum = new Passenger(passengerSize, passengerDest, timeArrive, 0);
+		Passenger dum = new Passenger(passengerSize, passengerDest, timeArrive, 1);
 		System.out.println("A group of " + passengerSize + " passengers arrived at " + this.inRouteNames[i1] + " heading to " + passengerDest + ".");
 		this.innerRouteLines[i1].enqueue(dum);
 	    }
 	}
 
 	for(int i2 = 0; i2 < this.outerRouteLines.length; i2++){
+	    this.outerRouteLines[i2].passengerWait();
 	    double _indicate2 = this.getProb();
 	    if(this.arrivalProb(_indicate2) == true){
 		int passengerSize2 = this.randomSize();
 		String passengerDest2 = randomOuterStop(i2);
 		int timeArrive2 = currentMinute;
-		Passenger dum2 = new Passenger(passengerSize2, passengerDest2, timeArrive2, 0);
+		Passenger dum2 = new Passenger(passengerSize2, passengerDest2, timeArrive2, 1);
 		System.out.println("A group of " + passengerSize2 + " passengers arrived at " + this.outRouteNames[i2] + " heading to " + passengerDest2 + ". ");
 		this.outerRouteLines[i2].enqueue(dum2);
 	    }
@@ -476,18 +551,20 @@ public class Simulator{
      *unloads Passengers from the Bus and then loads Passengers from the Bus
      *@param a The Bus that arrived at the Stop
      *@param matchingStop The Stop the Bus is At
-     *@return int[] three numbers, amount dropped off, picked up and the amount of time the picked up passengers spent waiting
+     *@return int[] four numbers, amount dropped off, picked up, the amount of time the picked up passengers spent waiting, and the amount of groups Served
      */
     public int[] unloadAndLoad(Bus a, PassengerQueue matchingStop){
 	String stopName = matchingStop.getName();
-	int [] ans = new int[3];
-	int drop = 0;
-	int[]  pickup = new int[2];
+	int [] ans = new int[4];
+	int[] drop = {0,0};
+	int[]  pickup ={0,0};
+
 	drop = a.unload(stopName);
 	pickup = a.loadEntire(matchingStop);
-	ans[0] = drop;
+	ans[0] = drop[0];
 	ans[1] = pickup[0];
 	ans[2] = pickup[1];
+	ans[3] = pickup[2];
 	return ans;
     }
     
@@ -503,10 +580,11 @@ public class Simulator{
 	for(int i = 1; i <= duration; i++){
 	    System.out.println("Minute " + i);
 	    this.assignPassengers(i);
-	    //this.busIncrementer();
+	    this.busIncrementer();
 	    this.displayLines();
+	    System.out.println("\n");
 	}
-	ans[0] = (double)this.getGroupsServed();
+	ans[0] = (double)this.getSetsServed();
 	ans[1] = (double)this.averageWaitTime();
 	return ans;
     }
@@ -553,11 +631,12 @@ public class Simulator{
 	    
 	    Simulator a = new Simulator(in, out, min, max, prob, cap, dur);
 	    double [] result = a.simulate(dur);
+	    System.out.print("Number of Groups Served: " + result[0] + ", Average Wait Time Per Group : " + result[1] + "\n");
 	    
 	    System.out.print("Do you Want to run another Simulation (Y/N)? : ");
 	    String b = scanner.next();
 	    String b2 = b.toLowerCase();
-	    if(b == "n"){
+	    if(b2.equals("n")){
 		break;
 	    }
 	}
