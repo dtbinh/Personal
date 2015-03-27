@@ -73,14 +73,14 @@ public class Simulator{
 	int innerTimeWaiting = 0;
 	int innerNextTime = 1;
 	for(int i3 = 0; i3 < this.innerBuses.length; i3++){
-	    this.innerBuses[i3] = new Bus(this.busCapacity,"Inner",inRouteNames[0], 1,innerTimeWaiting);
+	    this.innerBuses[i3] = new Bus(this.busCapacity,"Inner",inRouteNames[0], 1,innerTimeWaiting, false);
 	    innerTimeWaiting += 30;
 	}
 
 	int outerTimeWaiting = 0;
 	int outerNextTime = 1;
 	for(int i4 = 0; i4 < this.outerBuses.length; i4++){
-	    this.outerBuses[i4] = new Bus(this.busCapacity,"Outer",outRouteNames[0], 1, outerTimeWaiting);
+	    this.outerBuses[i4] = new Bus(this.busCapacity,"Outer",outRouteNames[0], 1, outerTimeWaiting, false);
 	    outerTimeWaiting += 30;
 	}	
     }
@@ -166,7 +166,7 @@ public class Simulator{
     public int getSetsServed(){
 	return this.groupsSetsServed;
     }
-
+    
     /**
      *Method that calculates the Average wait time for each passenger
      *@return double the Average Wait time
@@ -191,32 +191,61 @@ public class Simulator{
 	for(int i1 = 0; i1 < this.innerBuses.length; i1++){
 	    
 	    if(this.innerBuses[i1].isActive() == false){
-		this.innerBuses[i1].setTimeToRest(this.innerBuses[i1].getTimeToRest() - 1);//RESTING BUSES
+		this.innerBuses[i1].setTimeToRest(this.innerBuses[i1].getTimeToRest() - 1);
 		if(this.innerBuses[i1].isActive() == false){
 		    System.out.println("In Route Bus " + (i1 + 1) + " waiting at South P for " + this.innerBuses[i1].getTimeToRest() + " minutes. "); 
 		}
-
+		
 	    }
 	    
+
+	    
 	    if(this.innerBuses[i1].isActive() == true){
-		if(this.innerBuses[i1].inTransit()){
+		
+		
+		if(this.innerBuses[i1].inTransit() == true){
 		    this.innerBuses[i1].setToNextStop(this.innerBuses[i1].getToNextStop() - 1);
 		    
 		}
 		
-		    
-		if(this.innerBuses[i1].getToNextStop() > 0){
+		
+		if(this.innerBuses[i1].inTransit() == true){
 		    System.out.println("In Route Bus " + (i1 + 1) + " moving towards " + this.innerBuses[i1].getNextStop() + " . Arrives in " + this.innerBuses[i1].getToNextStop() + " minutes.");//MOVING BUSES
 		}
-
+		
 		
 
-		else if(innerBuses[i1].getToNextStop() == 0){
-
+		if(innerBuses[i1].getToNextStop() == 0){
+		    
 		    String name = this.innerBuses[i1].getNextStop();
 		    int num = this.getInnerStopNumber(name);
-		    if(num == 3){
-			System.out.print("In Route Bus " + (i1 + 1) + " arrives at South P. ");
+
+
+		    if(name == "Chapin"){
+			int [] result22 = this.unloadAndLoad(this.innerBuses[i1],this.innerRouteLines[num]);
+			int dropped2 = result22[0];
+			int pickedUp2 = result22[1];
+			int time2 = result22[2];
+			int groups2 = result22[3];
+			this.groupsServed += pickedUp2;
+			this.totalTimeWaited += time2;
+			this.groupsSetsServed += groups2;
+			System.out.print("In Route Bus " + (i1 + 1) +" arrives at " + name+ ". ");
+			if(dropped2 > 0){
+			    System.out.print("Drops off " + dropped2 + " passengers. ");
+			}
+			if(pickedUp2 > 0){
+			    System.out.print("Picks Up " + pickedUp2 + " passengers. ");
+			}
+			this.innerBuses[i1].setNextStop("South P");
+			this.innerBuses[i1].setToNextStop(20);
+			this.innerBuses[i1].setReturning(true);
+			System.out.println();
+		    }
+			
+			
+		   else if((name == "South P") && (this.innerBuses[i1].getReturning() == true)){
+			System.out.print("In Route Bus " + (i1 + 1) + " arrives at " + "South P");
 			int [] result = (this.innerBuses[i1]).unload("South P");
 			
 			int oneDrop = result[0];
@@ -236,10 +265,13 @@ public class Simulator{
 			    this.innerBuses[i1].setTimeToRest(30);
 			    System.out.println();
 			}
-		    }
+			
+			this.innerBuses[i1].setReturning(false);
+		    }	
+			
 			    
 		    
-		    else{
+		   else{
 			int [] result2 = this.unloadAndLoad(this.innerBuses[i1],this.innerRouteLines[num]);
 			int dropped = result2[0];
 			int pickedUp = result2[1];
@@ -248,7 +280,6 @@ public class Simulator{
 			this.groupsServed += pickedUp;
 			this.totalTimeWaited += time;
 			this.groupsSetsServed += groups;
-			System.out.println(time);
 			System.out.print("In Route Bus " + (i1 + 1) +" arrives at " + this.innerBuses[i1].getNextStop() + " .");
 			if(dropped > 0){
 			    System.out.print("Drops off " + dropped + " passengers. ");
@@ -257,17 +288,18 @@ public class Simulator{
 			    System.out.print("Picks Up " + pickedUp + " passengers. ");
 			}	
 			
-			if(num < 3){
-			    this.innerBuses[i1].setNextStop(this.inRouteNames[num + 1]);
-			    this.innerBuses[i1].setToNextStop(20);
-			}
+			
+			this.innerBuses[i1].setNextStop(this.inRouteNames[num + 1]);
+			this.innerBuses[i1].setToNextStop(20);
+			    
+				
 			System.out.println();
 		    }
 		}
 	    }
 	}
 	
-	    
+	
 
 	for(int i2 = 0; i2 < this.outerBuses.length; i2++){
 	    if(this.outerBuses[i2].isActive() == false){
@@ -280,20 +312,52 @@ public class Simulator{
 	    
 	    if(this.outerBuses[i2].isActive() == true){
 		if(this.outerBuses[i2].inTransit()){
-		    this.outerBuses[i2].setToNextStop(this.outerBuses[i2].getToNextStop() - 1);
-		    
+		    this.outerBuses[i2].setToNextStop(this.outerBuses[i2].getToNextStop() - 1);   
 		}
+
 
 		if(this.outerBuses[i2].getToNextStop() > 0){
 		    System.out.println("Out Route Bus " + (i2 + 1) + " moving towards " + this.outerBuses[i2].getNextStop() + " . Arrives in " + this.outerBuses[i2].getToNextStop() + " minutes. ");
 		}
 
+
 		else if(outerBuses[i2].getToNextStop() == 0){
+
+
+		    
 		    String name2 = this.outerBuses[i2].getNextStop();
 		    int num2 = this.getOuterStopNumber(name2);
-		    if(num2 == 3){
+		    if(name2 == "Target"){
+			int [] result4 = this.unloadAndLoad(this.outerBuses[i2
+									    ], this.outerRouteLines[num2]);
+			int dropped4 = result4[0];
+			int pickedUp4 = result4[1];
+			int time4 = result4[2];
+			int groups4 = result4[3];
+			this.groupsSetsServed += groups4;
+			this.groupsServed += pickedUp4;
+			this.totalTimeWaited += time4;
+			System.out.print("Out Route Bus " + (i2 + 1) + " arrives at " + name2 + ". ");
+			if(dropped4 > 0){
+			    System.out.print("Drops off " + dropped4 + " passengers. ");
+			}
+			if(pickedUp4 > 0){
+			    System.out.print("Picks Up " + pickedUp4 + " passengers. ");
+			}
+			this.outerBuses[i2].setNextStop("South P");
+			this.outerBuses[i2].setToNextStop(20);
+			this.outerBuses[i2].setReturning(true);
+			System.out.println();
+		    }
+			    
+		   
+
+
+		    
+		    else if((name2 == "South P") && (this.outerBuses[i2].getReturning() == true)){
+			
 			System.out.print("Out Route Bus " + (i2 +1) + " arrives at South P. ");
-			int result3[] = (this.innerBuses[i2]).unload("South P");
+			int result3[] = (this.outerBuses[i2]).unload("South P");
 			int oneDrop3 = result3[0];
 			int oneWait3 = result3[1];
 			if(oneDrop3 > 0){
@@ -311,6 +375,7 @@ public class Simulator{
 			    this.outerBuses[i2].setTimeToRest(30);
 			    System.out.println();
 			}
+			this.outerBuses[i2].setReturning(false);
 		    }
 		    else{
 			
@@ -322,25 +387,25 @@ public class Simulator{
 			this.groupsSetsServed += groups4;
 			this.groupsServed += pickedUp4;
 			this.totalTimeWaited += time4;
-			System.out.print("Out Route Bus " + (i2 + 1) + " arrives at" + this.outerBuses[i2].getNextStop() + ". ");
+			System.out.print("Out Route Bus " + (i2 + 1) + " arrives at " + this.outerBuses[i2].getNextStop() + ". ");
 			if(dropped4 > 0){
 			    System.out.print("Drops off " + dropped4 + " passengers. ");
 			}
 			if(pickedUp4 > 0){
 			    System.out.print("Picks Up " + pickedUp4 + " passengers. ");
 			}
-			if(num2 < 3){
 			    this.outerBuses[i2].setNextStop(this.outRouteNames[num2 + 1]);
 			    this.outerBuses[i2].setToNextStop(20);
-			}
+			
 			System.out.println();
 			
 		    }
 		}
 	    }
-	    
 	}
     }
+	
+
     
 
     
@@ -354,9 +419,9 @@ public class Simulator{
 	    System.out.println(i + " (" + this.inRouteNames[i] + ") : " + this.innerRouteLines[i]);
 	}
 
-	for(int j = 0; j < outerRouteLines.length; j++){
-	    System.out.println((j+4) + " (" + this.outRouteNames[j] + ") : " + this.outerRouteLines[j]);
-	}
+	//for(int j = 0; j < outerRouteLines.length; j++){
+	//System.out.println((j+4) + " (" + this.outRouteNames[j] + ") : " + this.outerRouteLines[j]);
+	    //}
     }
     
     
