@@ -1,0 +1,5 @@
+INDEX VERSION 1.127+C:\cygwin64\home\Ronald\Ronald\Ronald\JAVA\.metadata\.plugins\org.eclipse.jdt.core
+2896379174.index
+2873444127.index
+2257855681.index
+3383749067.index
