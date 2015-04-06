@@ -419,9 +419,9 @@ public class Simulator{
 	    System.out.println(i + " (" + this.inRouteNames[i] + ") : " + this.innerRouteLines[i]);
 	}
 
-	//for(int j = 0; j < outerRouteLines.length; j++){
-	//System.out.println((j+4) + " (" + this.outRouteNames[j] + ") : " + this.outerRouteLines[j]);
-	    //}
+	for(int j = 0; j < outerRouteLines.length; j++){
+	    System.out.println((j+4) + " (" + this.outRouteNames[j] + ") : " + this.outerRouteLines[j]);
+	}    
     }
     
     
