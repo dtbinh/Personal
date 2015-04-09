@@ -154,6 +154,10 @@ public class TreeNode{
 	    return false;
 	}
     }
+
+    public String toString(){
+	return this.getName();
+    }
     
 	    
 }
