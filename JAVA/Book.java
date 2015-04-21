@@ -104,4 +104,12 @@ public class Book{
     public void setISBN(String a){
 	this.isbn = a;
     }
+
+    /**
+     *toString method for the Book class
+     *@return String the String representation of the Book
+     */
+    public String toString(){
+	return this.getTitle();
+    }
 }
