@@ -1,2 +1,0 @@
-# Ronald
-All my Code

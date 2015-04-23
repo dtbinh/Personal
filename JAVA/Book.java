@@ -106,10 +106,26 @@ public class Book{
     }
 
     /**
+     *equals method for this Book class
+     
+     */
+    public boolean equals(Object obj){
+	Book object = (Book)obj;
+	if(object.getISBN().equals(this.getISBN())){
+	    return true;
+	}
+	else{
+	    return false;
+	}
+    }    
+	
+
+    /**
      *toString method for the Book class
      *@return String the String representation of the Book
      */
     public String toString(){
-	return this.getTitle();
+	return ": " + this.getTitle() + " by " + this.getAuthor();
+	
     }
 }
