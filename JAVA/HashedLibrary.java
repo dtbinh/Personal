@@ -142,35 +142,7 @@ public class HashedLibrary implements Serializable{
 	    Book temp = this.getBookByisbn(key);
 	    System.out.printf(temp.getISBN() + ":  " + "%-35s" + "%-32s" + "%-5s", temp.getTitle(), temp.getAuthor(), temp.getPublisher());
 	    System.out.println();
-	    //System.out.println(key);
 	}
-    }
-
-
-    public static void main(String [] args)throws Exception{
-	HashedLibrary library = new HashedLibrary();
-	// Book a = new Book("Animal Farm", "noOne", "noOne", "9780452284241");
-	//library.hashLibrary.put(a.getISBN(), a);
-	//library.addBook("Animal Farm 2", "NoOne 2", "noOne 2", "9780452284241");
-	/*library.addBook("Animal Farm 41", "NoOne 3", "noOne 3", "9780652134391");
-	library.addBook("Animal Farm 42", "NoOne 3", "noOne 3", "9780652134291");
-	library.addBook("Animal Farm 43", "NoOne 3", "noOne 3", "9780652134591");
-	library.addBook("Animal Farm 44", "NoOne 3", "noOne 3", "9780652134791");
-	library.addBook("Animal Farm 45", "NoOne 3", "noOne 3", "9780652162538");
-	library.addBook("Animal Farm 46", "NoOne 3", "noOne 3", "9780652397274");
-	library.addBook("Animal Farm 47", "NoOne 3", "noOne 3", "9780652832691");
-	library.addBook("Animal Farm 48", "NoOne 3", "noOne 3", "9780652146384");
-	library.addBook("Animal Farm 49", "NoOne 3", "noOne 3", "9780652109191");
-	library.addBook("Animal Farm 50", "NoOne 3", "noOne 3", "9780652149291");
-	library.addBook("Animal Farm 51", "NoOne 3", "noOne 3", "9780652118931");
-	//library.addBook("Animal Farm 109", "NoOne 3", "noOne 3", "9780652118931");
-	*/
-        library.addAllBookInfo("book_list.txt");
-        library.addAllBookInfo("book_list2.txt");
-	//System.out.println(library.getBookByisbn("9780452284246"));
-	//System.out.println(library.hashLibrary);
-	//System.out.println(library.hashLibrary);	
-	library.printCatalog();
     }
 }
 
