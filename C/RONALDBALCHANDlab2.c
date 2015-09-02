@@ -23,8 +23,8 @@ int main(void){//this is the main program
   int i = 0;
   int sum = 0;
   while(i <= n){
-    sum = sum + i;
-    i = i + 1;
+    sum += i;
+    i++;
   }
 
   printf("\nThe sum of all numbers from 1 to %d is %d", n, sum);
