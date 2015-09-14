@@ -4,7 +4,7 @@
 //HW 1 PART A
 
 #include <stdio.h>
-
+//Exercise 7 from chapter 3
 //This program converts degree from Farenheit to Celsius using the following formula
 //C = (F - 32)/1.8
 
