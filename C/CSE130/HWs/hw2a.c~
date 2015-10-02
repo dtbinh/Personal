@@ -1,0 +1,21 @@
+//RONALD BALCHAND
+//#109806273
+//CSE 130 HW# 2 PART A
+//THis program reads the input of two integers, and rounds the first integer up to the next largest multiple of the second integer
+
+#include <stdio.h>
+
+int main(null){
+  int i = 0;
+  int j = 0;
+
+  printf("Please enter two integers: ");
+  scanf("%d %d", &i, &j);
+
+  printf("\nYou entered %d and %d as i and j, respectively", i, j);
+  return 0;
+}
+
+  
+
+  
