@@ -13,8 +13,7 @@
 float average(int m, int n){
   float i = (float)m;
   float j = (float)n;
-  float ans = (i+j)/2;
-  return ans;
+  return ((i + j)/2.0);
 }
 
 int main(void){
@@ -24,9 +23,7 @@ int main(void){
   scanf("%d%d", &m, &n);
   printf("\nm  is %d, and n is %d\n", m, n);
 
-  float ans = average(m, n);
-
-  printf("\nAverage of %d and %d is: %f\n", m, n, ans);
+  printf("\nAverage of %d and %d is: %f\n", m, n, average(m, n));
 }
 
   
