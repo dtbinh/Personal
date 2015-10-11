@@ -1,6 +1,6 @@
 //RONALD BALCHAND
 //#109806273
-//CSE 130 HW #3
+//CSE 130 HW #3 Part A
 //This Progrram takes the input from the user and generates the hailstone sequence
 
 #include <stdio.h>
@@ -54,5 +54,6 @@ int main(null){
       }
     }
   }
+  return 0;
 }
 	
