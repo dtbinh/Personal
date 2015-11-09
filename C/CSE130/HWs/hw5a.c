@@ -29,7 +29,9 @@ int main(null){
   if(ans == y){
     int offset;
     printf("\nEnter your own offset value: ");
-    scanf(" %d
+    scanf(" %d");
+    fflush(stdin);
+    
   
 
 
