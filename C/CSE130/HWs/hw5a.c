@@ -19,7 +19,7 @@ int counter(int * a, int b, int n){//program returns how many occurrences of b t
 
 
 
-int * sort(int offset, int lower, int higher, int *a){//made for integer arays ranging 1-100
+void sort(int offset, int lower, int higher, int *a){//made for integer arays ranging 1-100
   int count[100];
   int i3;
   for(i3 = 0; i3 < 100; i3++){
@@ -35,16 +35,32 @@ int * sort(int offset, int lower, int higher, int *a){//made for integer arays r
     
   }
 
+  int placeKeeper = 0;
+  int i4;
+  for(i4 = 0; i4 < 100; i4++){
+    if(count[i4] != 0){
+      
+      int countdown;
+      int numberToAdd = i4 - offset + 1;
+
+      for(countdown = count[i4]; countdown > 0; countdown--){
+	a[placeKeeper] = numberToAdd;
+	placeKeeper++;
+      }
+    }
+  }
+
   int i2;
   for(i2 = 0; i2 < 100; i2++){
-    printf("%d, ", count[i2]);
+    if(a[i2] != 0){
+      printf("%d, ", a[i2]);
+    }
   }
-  
-  return a;
 }
 
 
 int main(null){
+  printf("Bucket Sort: \n");
   int first;
   int last;
   printf("Would you like to enter your own offset value(y/n)");
@@ -56,12 +72,14 @@ int main(null){
     scanf(" %d%*c",&offset);
     first = 1 - offset;
     last = first + 99;
-    printf("\nSorting from %d to %d .\n", first, last);
+   
   }else{
     offset = 0;
     first = 1;
     last = 100;
+    
   }
+  printf("\nSorting from %d to %d .\n", first, last);
   printf("\nNow enter the numbers that you would like to sort : ");
   int count[100];
   int numbers [100];
@@ -91,17 +109,7 @@ int main(null){
     break;
   }
 
-
-  printf("\n");
-  
-  int i1;
-  for(i1 = 0; i1 < 100; i1++){
-    if(numbers[i1] != 0){
-      printf("%d ", numbers[i1]);
-    }
-  }
-
-  printf("\n\n");
+  printf("\n\nSorted Array: ");
 
   sort(offset, first, last, numbers);
   
