@@ -23,7 +23,9 @@ int counter(int * a, int b, int n){//program returns how many occurrences of b t
 
 
 
-void sort(int offset, int lower, int higher, int *a){
+void sort(int offset, int lower, int higher, int *a){//Uses the given BucketSort algorithm to sort an array. Takes the array, the lower and upper bounds of the range, and the offset value if any
+
+  
   int count[100];
   int i3;
   for(i3 = 0; i3 < 100; i3++){

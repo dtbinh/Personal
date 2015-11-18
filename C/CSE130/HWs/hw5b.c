@@ -27,5 +27,34 @@ void sum(double a[], int n){//finds and prints the even and odd index sum
 
 int main(null){
   int n;
-  printf("
+  printf("Enter N: ");
+  scanf("%d%*c", &n);
+  double numbers[n];
+
+
+
+  char line[1024];
+
+  char *a;
+  char *b;
+  double v;
+  int i = 0;
+
+  printf("Enter %d doubles: ", n);
+
+  while(fgets(line, sizeof(line), stdin)){
+    a = line;
+    for(a = line; ; a = b){
+      v = strtod(a, &b);
+      if(a == b){
+	break;
+      }
+      //printf("%f",v);
+      numbers[i] = v;
+      i++;
+    }
+    break;
+  }
+  sum(numbers, n);
+  
 }
