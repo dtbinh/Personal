@@ -1,0 +1,70 @@
+//RONALD BALCHAND
+//#109806273
+//CSE 130 LAB 11
+
+  #include <stdio.h>
+
+const int size = 10;   // Global variable size.
+
+void fillIt(int *someArray);  //Prototype for fillIt.
+
+//Prototype for avg.
+
+int main(void)
+{
+  // Part - I
+
+  double d1 = 2.57, d2;
+
+  int x = 23;          // <-- Insert declaration for y
+  int *px;             // <-- Insert declaration for *py
+
+  double *pd1, *pd2;   // Pointers to double
+
+  px = &x;               // px looks at x.
+  pd1 = &d1; pd2 = &d2;  // Initialize pd1 and pd2.
+  // Initialize py.
+
+  printf("\nx = %d, d = %f\n\n", x, d);
+
+  printf("Address of d1 = %u, Address of d2  = %u\n\n", pd1, pd2);
+  printf("Address of x = %u\n\n", px);
+
+  // Insert code for modifying integers x, y.
+
+
+  // Print x, y after modification.
+
+
+  printf("End of Part-I\n\n");
+
+  // Part-II
+
+  int A[size];
+  int i; float avg = 0;
+
+  fillIt( A );
+
+  for(i=0; i < size; i++)
+    printf("%d ", A[i]);
+  printf("\n");
+
+  // Insert a function call for average.
+
+  printf ("Average of array values is: %f\n\n", avg);
+
+  return 0;
+}
+
+void fillIt( int *someArray )
+{
+  int i;
+
+  for( i = 0; i < size; i++)
+    {
+      *someArray = 100 + i;
+      someArray++;
+    }
+}
+
+// Insert 
