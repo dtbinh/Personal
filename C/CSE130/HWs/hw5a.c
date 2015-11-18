@@ -2,6 +2,10 @@
 //#109806273
 //CSE 130
 //HW 5 PART A
+//This program sorts an array of integers entered by the user, using a new method called BucketSort where each integer is counted and the amount corresponds to anothe array where the index corresponds with the amount of times that integer appears in the array. It then manually reassigns the value of each element in the original array so that it becomes sorted.
+
+//This program also includes the bonus to allow the user to enter their own offset value, changing the range of integers in which you can sort
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,17 +23,17 @@ int counter(int * a, int b, int n){//program returns how many occurrences of b t
 
 
 
-void sort(int offset, int lower, int higher, int *a){//made for integer arays ranging 1-100
+void sort(int offset, int lower, int higher, int *a){
   int count[100];
   int i3;
   for(i3 = 0; i3 < 100; i3++){
     count[i3] = 0;
   }
   int i;
-  for(i = lower; i <= higher; i++){//go through the lower to upper bound
+  for(i = lower; i <= higher; i++){
     if(i != 0){
-      if(counter(a, i, 100) != 0){//if there are more than 0 of this number in the array entered
-	count[i + offset - 1] = counter(a, i, 100);// its respective place in the count array is equal to the number of it in the entered array
+      if(counter(a, i, 100) != 0){
+	count[i + offset - 1] = counter(a, i, 100);
       }
     }
     
