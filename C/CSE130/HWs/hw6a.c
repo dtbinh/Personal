@@ -13,11 +13,14 @@ typedef struct{//creation of the struct for each student and their components
   int assignments[6];
   int midterm;
   int final;
+
+  double classGrade;
   
 }student;
 
 
-//this function calcualates a students' final grade taking their final grade, midterm grade, an array of their assignments, and the number of assignments 
+//this function calcualates a students' final grade taking their final grade, midterm grade, an array of their assignments, and the number of assignments
+
 double finalCalculator(int midterm, int final, int *assignments, int numA){
   double ans;
   double dmid = (double)midterm;
@@ -30,22 +33,14 @@ double finalCalculator(int midterm, int final, int *assignments, int numA){
   int sum = 0;
   for(i = 0; i < numA; i++){
     sum += assignments[i];
-    
-    printf("heres whats at assignment position %d : %d\n\n",i,assignments[i] );
   }
 
-  printf("The sum: %d\n\n", sum);
   double dsum = (double)sum;
-
-  printf("The sum : %f\n\n", sum);
   double dnum = (double)numA;
   
   double assignAverage = dsum/dnum;
   
   double assignPer = assignAverage * .4;
-
-  printf("grades for each component: %f %f %f\n", dmid, dfin, assignAverage);
-  printf("Makeup: %f %f %f",midPer, finalPer, assignPer);
 
   ans = (assignPer + midPer + finalPer);
   
@@ -55,21 +50,31 @@ double finalCalculator(int midterm, int final, int *assignments, int numA){
 
 
 int main(null){
-  student a;
+  int numAssignments;
+  int maxStudents = 200;
+  student *students;
+  char *filename;
+  int currentStudent = 0;
+
+
+  printf("Enter Input Filename: ");
+  scanf("%s", &filename);
+  printf("Enter Number of Assignmment Grades: ");
+  scanf(" %d", &numAssignments);
+  
+  
+  
+  /*  student a;
   a.name = "Ronald Balchand";
   a.id = 109806273;
-  /* int *b;
-  b[0] = 90;
-  b[1] = 100;*/
   a.assignments[0] = 90;
   a.assignments[1] = 100;
-  // a.assignments[0] = 90;
-  //a.assignments[1] = 100;
   a.midterm = 80;
   a.final = 100;
 
   //printf("%d %d", a.assignments[0], a.assignments[1]);
   
-  printf("\n\n%f\n", finalCalculator(80, 100, a.assignments, 2));
+  printf("\n\n%.2f\n", finalCalculator(a.midterm, a.final, a.assignments, 2));
+  */
 }
     
