@@ -1,0 +1,2 @@
+int main(null){
+  char letters[] = new char[26];
