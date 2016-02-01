@@ -1,0 +1,13 @@
+{
+    "tags": [
+	{ "tag": "a",	    "attributes": ["href"],	    "has_closing_tag": "true",	"legal_parents": ["body", "div", "li", "p", "td"]	},
+	{ "tag": "br",	    "attributes": [],		    "has_closing_tag": "false",	"legal_parents": ["a", "body", "div", "li", "p", "ol", "td"]},
+	{ "tag": "div",	    "attributes": ["class", "id"],  "has_closing_tag": "true",	"legal_parents": ["body", "div"]	},
+	{ "tag": "img",	    "attributes": ["alt", "src"],   "has_closing_tag": "false",	"legal_parents": ["a", "body", "div", "li", "p", "td"]	},
+	{ "tag": "p",	    "attributes": ["class"],	    "has_closing_tag": "true",	"legal_parents": ["body", "div"]		},
+	{ "tag": "Text",    "attributes": ["text"],	    "has_closing_tag": "false",	"legal_parents": ["a", "body", "div", "li", "p", "td", "title"]		},
+	{ "tag": "table",   "attributes": ["class", "id"],  "has_closing_tag": "true",	"legal_parents": ["body", "div"]	},
+	{ "tag": "td",	    "attributes": ["class", "id"],  "has_closing_tag": "true",	"legal_parents": ["tr"]	},
+	{ "tag": "tr",	    "attributes": ["class", "id"],  "has_closing_tag": "true",	"legal_parents": ["table"]	}
+    ]
+}
