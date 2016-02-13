@@ -37,7 +37,7 @@ L1:
 	li $s0, 255	# a
 	li $s1, 11 	# b
 	li $s2, 9  	# c
-	
+	#[]
 	ble $s0, $s1, a_LTE_b 	# a <= b, so either b or c is biggest
 	ble $s0, $s2, maxC 		# a > b but a <= c, so max = c
 	move $s3, $s0 			# a > b and a > c, so max = a
