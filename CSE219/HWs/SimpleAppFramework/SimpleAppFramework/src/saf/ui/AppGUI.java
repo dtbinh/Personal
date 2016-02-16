@@ -63,9 +63,7 @@ public class AppGUI implements AppStyleArbiter {
      * 
      * @param app The app within this gui is used.
      */
-    public AppGUI(  Stage initPrimaryStage, 
-		    String initAppTitle, 
-		    AppTemplate app){
+    public AppGUI(Stage initPrimaryStage, String initAppTitle,AppTemplate app){
 	// SAVE THESE FOR LATER
 	primaryStage = initPrimaryStage;
 	appTitle = initAppTitle;
@@ -83,7 +81,9 @@ public class AppGUI implements AppStyleArbiter {
      * 
      * @return This application GUI's app pane.
      */
-    public BorderPane getAppPane() { return appPane; }
+    public BorderPane getAppPane() { 
+        return appPane; 
+    }
     
     /**
      * Accessor method for getting this application's primary stage's,
@@ -91,7 +91,9 @@ public class AppGUI implements AppStyleArbiter {
      * 
      * @return This application's window's scene.
      */
-    public Scene getPrimaryScene() { return primaryScene; }
+    public Scene getPrimaryScene() {
+        return primaryScene; 
+    }
     
     /**
      * Accessor method for getting this application's window,
@@ -99,7 +101,9 @@ public class AppGUI implements AppStyleArbiter {
      * 
      * @return This application's primary stage (i.e. window).
      */    
-    public Stage getWindow() { return primaryStage; }
+    public Stage getWindow() {
+        return primaryStage; 
+    }
 
     /**
      * This method is used to activate/deactivate toolbar buttons when

@@ -321,6 +321,23 @@ public class Workspace extends AppWorkspaceComponent {
 		HTMLTagPrototype selectedTag = (HTMLTagPrototype) selectedItem.getValue();
 		HashMap<String, String> attributes = selectedTag.getAttributes();
 		Collection<String> keys = attributes.keySet();
+                
+                ArrayList<String> tempParents = selectedTag.getLegalParents();
+                //System.out.println(tempParents);
+                //String a = selectedT
+                
+                tagToolbar.getChildren().remove(3);
+                
+                for(int i = 0; i < tagButtons.size() - 1; i++){
+                    String a = tagButtons.get(i).getText();
+                    if((selectedTag.isLegalParent(a))){
+                        System.out.println(a);
+                    }
+                }
+                
+                
+                
+                
 		int row = 1;
 		for (String attributeName : keys) {
 		    String attributeValue = selectedTag.getAttribute(attributeName);

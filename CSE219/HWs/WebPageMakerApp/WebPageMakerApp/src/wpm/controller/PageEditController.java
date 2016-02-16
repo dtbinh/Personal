@@ -75,6 +75,7 @@ public class PageEditController {
      */
     public void handleAttributeUpdate(HTMLTagPrototype selectedTag, String attributeName, String attributeValue) {
 	if (enabled) {
+            //System.out.print("Selected something");
 	    try {
 		// FIRST UPDATE THE ELEMENT'S DATA
 		selectedTag.addAttribute(attributeName, attributeValue);
@@ -104,10 +105,10 @@ public class PageEditController {
     public void handleAddElementRequest(HTMLTagPrototype element) {
 	if (enabled) {
 	    Workspace workspace = (Workspace) app.getWorkspaceComponent();
-
-	    // GET THE TREE TO SEE WHICH NODE IS CURRENTLY SELECTED
+            // GET THE TREE TO SEE WHICH NODE IS CURRENTLY SELECTED
 	    TreeView tree = workspace.getHTMLTree();
 	    TreeItem selectedItem = (TreeItem) tree.getSelectionModel().getSelectedItem();
+            System.out.println(selectedItem);
 	    HTMLTagPrototype selectedTag = (HTMLTagPrototype) selectedItem.getValue();
 
 	    // MAKE A NEW HTMLTagPrototype AND PUT IT IN A NODE

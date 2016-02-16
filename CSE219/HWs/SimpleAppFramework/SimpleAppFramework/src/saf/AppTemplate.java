@@ -55,10 +55,18 @@ public abstract class AppTemplate extends Application {
     public abstract AppComponentsBuilder makeAppBuilderHook();
     
     // COMPONENT ACCESSOR METHODS
-    public AppDataComponent getDataComponent() { return dataComponent; }
-    public AppFileComponent getFileComponent() { return fileComponent; }
-    public AppWorkspaceComponent getWorkspaceComponent() { return workspaceComponent; }
-    public AppGUI getGUI() { return gui; }
+    public AppDataComponent getDataComponent() { 
+        return dataComponent; 
+    }
+    public AppFileComponent getFileComponent() {
+        return fileComponent; 
+    }
+    public AppWorkspaceComponent getWorkspaceComponent() { 
+        return workspaceComponent; 
+    }
+    public AppGUI getGUI() { 
+        return gui; 
+    }
 
     /**
      * This is where our Application begins its initialization, it will create
