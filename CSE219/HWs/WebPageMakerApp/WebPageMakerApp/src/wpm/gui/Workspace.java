@@ -80,6 +80,7 @@ public class Workspace extends AppWorkspaceComponent {
     ScrollPane tagToolbarScrollPane;
     ArrayList<Button> tagButtons;
     HashMap<String, HTMLTagPrototype> tags;
+    ArrayList<Button> unallowedTags;//added to make sure rules of legal parents are enforced
 
     // THIS IS THE TREE REPRESENTING THE DOM
     TreeView htmlTree;
@@ -323,18 +324,27 @@ public class Workspace extends AppWorkspaceComponent {
 		Collection<String> keys = attributes.keySet();
                 
                 ArrayList<String> tempParents = selectedTag.getLegalParents();
-                //System.out.println(tempParents);
-                //String a = selectedT
-                
-                tagToolbar.getChildren().remove(3);
-                
-                for(int i = 0; i < tagButtons.size() - 1; i++){
-                    String a = tagButtons.get(i).getText();
-                    if((selectedTag.isLegalParent(a))){
-                        System.out.println(a);
+                               
+                //System.out.println((tagToolbar.getChildren()).get(2));
+                /*
+                for(int i = 0; i < tempParents.size() - 1; i++){
+                    String a = selectedTag.getTagName();
+                    Button temp = tagButtons.get(i);
+                    HTMLTagPrototype y = tags.get(temp.getText());
+                   System.out.println(y.getTagName());
+                    
+                   if(!(.isLegalParent(a))){
+                        unallowedTags.add((Button)(tagToolbar.getChildren().remove(i)));
                     }
-                }
-                
+                }*/
+                DataManager dataManager = (DataManager) app.getDataComponent();
+                Button temp = tagButtons.get(2);
+                System.out.println(temp.getText());
+                HTMLTagPrototype temp2 = dataManager.getTag(temp.getText());
+                System.out.println(temp2.getTagName());
+                System.out.println()
+               //System.out.println(y.getTagName());
+                    
                 
                 
                 
