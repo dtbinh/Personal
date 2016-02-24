@@ -167,7 +167,7 @@ public class AppFileController {
 		    
 	// AND REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
 	// THE APPROPRIATE CONTROLS
-	app.getGUI().updateToolbarControls(saved);	
+	app.getGUI().updateToolbarControls(true);	
     }
     
     /**

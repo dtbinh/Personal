@@ -94,6 +94,7 @@ public class PageEditController {
 		dialog.show(props.getProperty(ATTRIBUTE_UPDATE_ERROR_TITLE), props.getProperty(ATTRIBUTE_UPDATE_ERROR_MESSAGE));
 	    }
 	}
+        app.getGUI().updateToolbarControls(false);
     }
 
     /**
@@ -124,6 +125,7 @@ public class PageEditController {
 
 	    // FORCE A RELOAD OF TAG EDITOR
 	    workspace.reloadWorkspace();
+            app.getGUI().updateToolbarControls(false);
 
 	    try {
 		FileManager fileManager = (FileManager) app.getFileComponent();
@@ -135,6 +137,7 @@ public class PageEditController {
 		dialog.show(props.getProperty(ADD_ELEMENT_ERROR_TITLE), props.getProperty(ADD_ELEMENT_ERROR_MESSAGE));
 	    }
 	}
+        
     }
 
     /**
@@ -164,7 +167,11 @@ public class PageEditController {
 		AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
 		PropertiesManager props = PropertiesManager.getPropertiesManager();
 		dialog.show(props.getProperty(CSS_EXPORT_ERROR_TITLE), props.getProperty(CSS_EXPORT_ERROR_MESSAGE));
-	    }
+	    
+            }
+            app.getGUI().updateToolbarControls(false);
 	}
+        
+        
     }
 }

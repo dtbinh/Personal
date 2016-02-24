@@ -124,6 +124,9 @@ public class AppGUI implements AppStyleArbiter {
         // THIS TOGGLES WITH WHETHER THE CURRENT COURSE
         // HAS BEEN SAVED OR NOT
         saveButton.setDisable(saved);
+        if(saved == false){
+            fileController.markFileAsNotSaved();
+        }
 
         // ALL THE OTHER BUTTONS ARE ALWAYS ENABLED
         // ONCE EDITING THAT FIRST COURSE BEGINS
@@ -161,7 +164,9 @@ public class AppGUI implements AppStyleArbiter {
             fileController.handleNewRequest();
         });
         saveButton.setOnAction(e -> {
-            fileController.handleSaveRequest();
+            if(fileController.isSaved() == false){                    
+                fileController.handleSaveRequest();
+            }
         });
         exitButton.setOnAction(e -> {
             fileController.handleExitRequest();

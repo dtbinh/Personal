@@ -29,7 +29,7 @@
 .max_pane{
     -fx-fit-to-height: true;
     -fx-fit-to-width: true;
-    -fx-padding: 10 10 10 10;
+    //-fx-padding: 10 10 10 10;
     -fx-border-color: "black";
     -fx-background: "blue";
 }
@@ -37,7 +37,8 @@
 
 //THIS IS USED FOR THE TWO PANES THAT WILL HAVE A SPECIFIC BACK GROUND COLOR
 .blue_background{
-    -fx-background: "blue";
+    -fx-background-color: "blue";
+    -fx-padding: 10 10 10 10; 
     //-fx-fit-to-height: true;
     //-fx-fit-to-width: true;    
 }

@@ -10,8 +10,8 @@
 	{ "tag": "table",   "attributes": ["class", "id"],  "has_closing_tag": "true",	"legal_parents": ["body", "div"]	},
 	{ "tag": "td",	    "attributes": ["class", "id"],  "has_closing_tag": "true",	"legal_parents": ["tr"]	},
 	{ "tag": "tr",	    "attributes": ["class", "id"],  "has_closing_tag": "true",	"legal_parents": ["table"]	},
-        { "tag": "ul",      "attributes": ["class", "id"],  "has_closing_tag": "true",  "legal_parents": ["body", "div"] },
-        { "tag": "ol",      "attributes": ["class", "id"],  "has_closing_tag": "true",  "legal_parents": ["body", "div"] },
+        { "tag": "ul",      "attributes": ["class", "id"],  "has_closing_tag": "true",  "legal_parents": ["body", "div","ul","ol" ] },
+        { "tag": "ol",      "attributes": ["class", "id"],  "has_closing_tag": "true",  "legal_parents": ["body", "div","ul","ol"] },
         { "tag": "li",      "attributes": ["class", "id"],  "has_closing_tag": "true",  "legal_parents": ["ol", "ul"] }
     ]
 }

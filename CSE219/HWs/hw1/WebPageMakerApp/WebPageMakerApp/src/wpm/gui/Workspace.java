@@ -87,8 +87,7 @@ public class Workspace extends AppWorkspaceComponent {
     ScrollPane tagToolbarScrollPane;
     ArrayList<Button> tagButtons;
     HashMap<String, HTMLTagPrototype> tags;
-    ArrayList<Button> unallowedTags;//added to make sure rules of legal parents are enforced
-
+    
     // THIS IS THE TREE REPRESENTING THE DOM
     TreeView htmlTree;
     TreeItem<HTMLTagPrototype> htmlRoot;
@@ -313,6 +312,8 @@ public class Workspace extends AppWorkspaceComponent {
                 workspace3.reloadWorkspace();
                 buttonStage.close();
             });
+           
+            gui.updateToolbarControls(false);
         }
     }
     
@@ -357,18 +358,19 @@ public class Workspace extends AppWorkspaceComponent {
 	// NOTE THAT EACH CLASS SHOULD CORRESPOND TO
 	// A STYLE CLASS SPECIFIED IN THIS APPLICATION'S
 	// CSS FILE
-	//tagToolbar.getStyleClass().add(CLASS_BLUE_BACKGROUND);
-        //tagToolbar.getStyleClass().add(CLASS_BLUE_BACKGROUND);
+	
 	for(Button b : tagButtons) {
 	    b.getStyleClass().add(CLASS_TAG_BUTTON);
 	}
-	leftPane.getStyleClass().add(CLASS_WHITE_BACKGROUND);
-       // leftPane.getStyleClass().add(CLASS_BORDERBLUE_PANE);
-	treeScrollPane.getStyleClass().add(CLASS_MAX_PANE);
+	//leftPane.getStyleClass().add(CLASS_WHITE_BACKGROUND);
+        leftPane.getStyleClass().add(CLASS_MAX_PANE);
+	treeScrollPane.getStyleClass().add(CLASS_WHITE_BACKGROUND);
 	tagEditorLabel.getStyleClass().add(CLASS_HEADING_LABEL);
         tagEditorScrollPane.getStyleClass().add(CLASS_WHITE_BACKGROUND);
         tagToolbar.getStyleClass().add(CLASS_BLUE_BACKGROUND);
-        //gui.getFileToolbar().getStyleClass().add(CLASS_BLUE_BACKGROUND);         //).getStyleClass().add(CLASS_BLUE_BACKGROUND);
+        gui.getAppPane().getTop().getStyleClass().add(CLASS_BLUE_BACKGROUND);
+        
+        
     }
 
     /**
@@ -382,7 +384,7 @@ public class Workspace extends AppWorkspaceComponent {
 	    // OUR INITIALIZATION SELECTIONS
 	    pageEditController.enable(false);
 
-	    // FIRST CLEAR OUT THE OLD STUFF
+	    // FIRST CLEAR OUT THE OLD STUF
 	    tagPropertyLabels.clear();
 	    tagPropertyTextFields.clear();
 	    tagEditorPane.getChildren().clear();
