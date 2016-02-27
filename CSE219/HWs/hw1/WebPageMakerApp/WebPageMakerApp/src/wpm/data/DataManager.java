@@ -22,7 +22,7 @@ import wpm.gui.Workspace;
  * This class serves as the data management component for this application.
  *
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public class DataManager implements AppDataComponent {
@@ -150,6 +150,8 @@ public class DataManager implements AppDataComponent {
 	TreeItem headItem = new TreeItem(headTag);
 	TreeItem titleItem = new TreeItem(titleTag);
 	TreeItem linkItem = new TreeItem(linkTag);
+        linkTag.addAttribute("REL", "stylesheet");
+        linkTag.addAttribute("TYPE", "text/css");
 	TreeItem bodyItem = new TreeItem(bodyTag);
 
 	// FIRST CLEAR OUT ANY OLD STUFF
@@ -158,10 +160,13 @@ public class DataManager implements AppDataComponent {
 	// AND ARRANGE THEM IN THE TREE
 	htmlRoot.getChildren().add(headItem);
 	headItem.getChildren().add(titleItem);
+        
 	headItem.getChildren().add(linkItem);
 	htmlRoot.getChildren().add(bodyItem);
 	
 	// AND FINALLY CLEAR THE CSS
 	cssText = "";
+        //FileManager a  = (FileManager) app.getFileComponent();
+        //a.clearFile("./temp/css/home.css");
     }
 }

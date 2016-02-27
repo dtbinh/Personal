@@ -25,7 +25,7 @@ import saf.components.AppStyleArbiter;
  * which would be customly provided for each app.
  * 
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public class AppGUI implements AppStyleArbiter {

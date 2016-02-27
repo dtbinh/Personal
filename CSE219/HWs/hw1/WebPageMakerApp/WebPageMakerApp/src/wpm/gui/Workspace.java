@@ -9,6 +9,8 @@ import saf.ui.AppMessageDialogSingleton;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
@@ -55,7 +57,8 @@ import static wpm.file.FileManager.TEMP_PAGE;
  * the user interface controls for editing work.
  *
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
+ * #100806273
  * @version 1.0
  */
 public class Workspace extends AppWorkspaceComponent {
@@ -151,6 +154,43 @@ public class Workspace extends AppWorkspaceComponent {
 
 	// LOAD ALL THE HTML TAG TYPES
 	FileManager fileManager = (FileManager) app.getFileComponent();
+        File file = new File("./temp/images");//FILE "MANAGER FOR EACH FILE 
+        File file2 = new File("./temp/index.html");//EACH NEED TO BE DELETED/CLEARED AND REMADE
+        File file3 = new File("./temp/css/home.css");
+        
+        if(file2.exists() == false){//FOR THE INDEX FILE
+           file2.createNewFile();
+        }else{
+            file2.delete();
+            file2.createNewFile();
+        }
+        
+         if(file3.exists() == false){//For the CSS FILE
+           file3.createNewFile();
+        }else{
+            file3.delete();
+            file3.createNewFile();
+        }
+         
+        if(file.exists() == false){//For the images directory
+            file.mkdir();
+        }else if(file.list().length==0){
+    			
+    		   file.delete();
+        }else{
+            String files[] = file.list();
+             for (String temp : files) {
+       	      //construct the file structure
+       	      File fileDelete = new File(file, temp);  		 
+        	      //recursive delete
+        	     fileDelete.delete();
+                   }
+            file.mkdir();
+        }
+         
+         
+        
+        //fileManager.clearFile("./temp/css/home.css");
 	DataManager dataManager = (DataManager) app.getDataComponent();
 
 	// AND NOW MAKE THE TREE
@@ -181,6 +221,7 @@ public class Workspace extends AppWorkspaceComponent {
 	    // INIT ITS EVENT HANDLER
             //code added here in order to handle deleter
 	    tagButton.setOnAction(e -> {
+                if((htmlTree.getSelectionModel().getSelectedItem()) != null){
 		String tagName = tagButton.getText();// find out the name of the Button you pressed
                 TreeItem selectedItem = (TreeItem) htmlTree.getSelectionModel().getSelectedItem();//figure out which leaf in the tree your at
                 HTMLTagPrototype selectedTag = (HTMLTagPrototype) selectedItem.getValue();//Getting the selected tag
@@ -191,6 +232,7 @@ public class Workspace extends AppWorkspaceComponent {
                 }else{  
 		HTMLTagPrototype clickedTag = dataManager.getTag(tagName);
 		pageEditController.handleAddElementRequest(clickedTag);//here
+                }
                 }
 	    });
 	}
@@ -250,7 +292,6 @@ public class Workspace extends AppWorkspaceComponent {
 	// IT INTO THE WEB ENGINE
 	dataManager.setHTMLRoot(htmlRoot);
 	fileManager.exportData(dataManager, TEMP_PAGE);
-	loadTempPage();
     }
 
     /**
@@ -278,6 +319,8 @@ public class Workspace extends AppWorkspaceComponent {
             System.out.println("You cannot remove this core tag");
         }else if("title".equals(tagName)){
             System.out.println("You cannot remove this core tag");
+        }else if("link".equals(tagName)){
+            System.out.println("You cannot remove this core tag");
         }else{//Else proceed with deleting the tag
             //HOWEVER BEFORE YOU CAN DELETE YOU MUST BE READY TO DELETE
             
@@ -302,9 +345,10 @@ public class Workspace extends AppWorkspaceComponent {
                 TreeView tree = workspace2.getHTMLTree();
                 TreeItem selectedItem = (TreeItem) tree.getSelectionModel().getSelectedItem();
                 selectedItem.getParent().getChildren().remove(selectedItem);
-                //selectedItem.setValue(null);
                 workspace2.reloadWorkspace();
                 buttonStage.close();
+                
+               
             });
 
             btn2.setOnAction((ActionEvent event) -> {//Answer was no
@@ -313,10 +357,14 @@ public class Workspace extends AppWorkspaceComponent {
                 buttonStage.close();
             });
            
+     
+            
             gui.updateToolbarControls(false);
         }
+       
+	    
     }
-    
+          
     /**
      * Accessor method for getting the html tree, which contains all the tags
      * for the page being edited.
@@ -398,52 +446,24 @@ public class Workspace extends AppWorkspaceComponent {
 		HTMLTagPrototype selectedTag = (HTMLTagPrototype) selectedItem.getValue();//Getting the selected tag
 		HashMap<String, String> attributes = selectedTag.getAttributes();//Getting the selected tags' attributes in a Hashmap
 		Collection<String> keys = attributes.keySet();//Gets the keys of the HashMap of the attributes
-                ArrayList<String> tempParents = selectedTag.getLegalParents();//Arraylist of the Legal parents 
-                               
-                //System.out.println(attributes);
-               /* 
-                int size1 = tagToolbar.getChildren().size();//Amount of Tags there are in the Toolbar
+                //THIS IS WHERE THE CODE GOES TO MAKE SURE THE LEGAL PARENTS ARE ENFORCED GOES
+                //FIRST DISABLE ALL BUTTONS NOT ALLOWED TO BE USED
+                int size1 = tagToolbar.getChildren().size();//Amount ofButtons in the list 
                 DataManager dataManager2 = (DataManager) app.getDataComponent();
-                
-                for(int i = 0; i < size1; i++){
-                    Button buttonTemp = (Button) tagToolbar.getChildren().get(i);//GRAB EACH BUTTON
-                    String stringTemp = buttonTemp.getText();//GET THE TEXT FROM EACH BUTTON
-                    HTMLTagPrototype tagTemp = dataManager2.getTag(stringTemp);//GET THE TAG 
-                    String currentStringTemp = selectedTag.getTagName();
-                    if(!(tagTemp.isLegalParent(currentStringTemp))){
-                        Button temp2 = (Button) tagToolbar.getChildren().remove(i);
+                String currentTagName = selectedTag.getTagName();
+                for(int i = 1; i < size1; i++){//Iterate through the toolbar
+                    Button buttonTemp = (Button) tagToolbar.getChildren().get(i);//Grab the button
+                    String stringTemp = buttonTemp.getText();
+                    HTMLTagPrototype tagTemp = dataManager2.getTag(stringTemp);
+                    if(tagTemp.isLegalParent(currentTagName) == false){//IF THE BUTTON IS NOT A POSSIBLE CHILD
+                        tagToolbar.getChildren().get(i).setDisable(true);//DISABLE THE BUTTON
+                    }else{//ELSE(BUTTON IS A POSSIBLE CHILD
+                        tagToolbar.getChildren().get(i).setDisable(false);//ENABLE IT
                     }
                     
                 }
-                */
-                //ITERATE THROUGH EACH OF THE BUTTONS
-                //REMOVE THEM IF THEY ARE NOT LEGAL PARENTS BUT STORE THEM
-                //ADD ANY THAT ARE NOT DISPLAYED
                 
-               /* 
-                //System.out.println((tagToolbar.getChildren()).get(2));
-                
-                for(int i = 0; i < tempParents.size() - 1; i++){
-                    String a = selectedTag.getTagName();
-                    Button temp = tagButtons.get(i);
-                    HTMLTagPrototype y = tags.get(temp.getText());
-                   System.out.println(y.getTagName());
-                    
-                   if(!(.isLegalParent(a))){
-                        unallowedTags.add((Button)(tagToolbar.getChildren().remove(i)));
-                    }
-                }
-                DataManager dataManager = (DataManager) app.getDataComponent();
-                Button temp = tagButtons.get(2);
-                System.out.println(temp.getText());
-                HTMLTagPrototype temp2 = dataManager.getTag(temp.getText());
-                System.out.println(temp2.getTagName());
-                System.out.println();
-               //System.out.println(y.getTagName());
-                    
-                //End of Code Insertion
-                
-                */
+               
 		int row = 1;
 		for (String attributeName : keys) {
 		    String attributeValue = selectedTag.getAttribute(attributeName);
@@ -454,7 +474,7 @@ public class Workspace extends AppWorkspaceComponent {
 		    tagEditorPane.add(attributeLabel, 0, row);
 		    tagEditorPane.add(attributeTextField, 1, row);
 		    attributeTextField.textProperty().addListener(e -> {
-			// UPDATE THE TEMP SITE AS WE TYPE ATTRIBUTE VALUES
+		// UPDATE THE TEMP SITE AS WE TYPE ATTRIBUTE VALUES
 			pageEditController.handleAttributeUpdate(selectedTag, attributeName, attributeTextField.getText());
 		    });
 		    row++;
@@ -464,6 +484,7 @@ public class Workspace extends AppWorkspaceComponent {
 	    // LOAD THE CSS
 	    DataManager dataManager = (DataManager) app.getDataComponent();
 	    cssEditor.setText(dataManager.getCSSText());
+            htmlView.getEngine().reload();
 
 	    // THEN FORCE THE CHANGES TO THE TEMP HTML PAGE
 	    FileManager fileManager = (FileManager) app.getFileComponent();
@@ -472,6 +493,8 @@ public class Workspace extends AppWorkspaceComponent {
 	    // WE DON'T WANT TO RESPOND TO EVENTS FORCED BY
 	    // OUR INITIALIZATION SELECTIONS
 	    pageEditController.enable(true);
+          
+            loadTempPage();
 	} catch (Exception e) {
 	    AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
 	    PropertiesManager props = PropertiesManager.getPropertiesManager();

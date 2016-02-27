@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/Recitation/recitation1/SBUCSE219/HW1/WebPageMakerApp/WebPageMakerApp/src/wpm/css/wpm_style.css</file>
-            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/Recitation/recitation1/SBUCSE219/HW1/WebPageMakerApp/WebPageMakerApp/src/wpm/PropertyType.java</file>
-            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/Recitation/recitation1/SBUCSE219/HW1/WebPageMakerApp/WebPageMakerApp/src/wpm/WebPageMaker.java</file>
-            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/Recitation/recitation1/SBUCSE219/HW1/WebPageMakerApp/WebPageMakerApp/data/tags.json</file>
-            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/Recitation/recitation1/SBUCSE219/HW1/WebPageMakerApp/WebPageMakerApp/src/wpm/gui/Workspace.java</file>
-            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/Recitation/recitation1/SBUCSE219/HW1/WebPageMakerApp/WebPageMakerApp/data/simple_app_properties.xml</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/src/wpm/css/wpm_style.css</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/temp/index.html</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/data/tags.json</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/temp/css/home.css</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/src/wpm/controller/PageEditController.java</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/src/wpm/file/FileManager.java</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/src/wpm/WebPageMaker.java</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/src/wpm/gui/Workspace.java</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/src/wpm/data/HTMLTagPrototype.java</file>
+            <file>file:/C:/cygwin64/home/Ronald/Personal/CSE219/HWs/hw1/WebPageMakerApp/WebPageMakerApp/src/wpm/data/DataManager.java</file>
         </group>
     </open-files>
 </project-private>

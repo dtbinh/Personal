@@ -34,7 +34,7 @@ import static wpm.file.FileManager.JSON_TAG_NAME;
  * providing all I/O services.
  *
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public class FileManager implements AppFileComponent {
@@ -216,7 +216,77 @@ public class FileManager implements AppFileComponent {
      */
     @Override
     public void exportData(AppDataComponent data, String filePath) throws IOException {
-	System.out.println("THIS SHOULD EXPORT THE WEB PAGE TO THE temp DIRECTORY, INCLUDING THE CSS FILE");
+        DataManager dataManager = (DataManager)data;
+        TreeItem root = dataManager.getHTMLRoot();
+        PrintWriter out = new PrintWriter(filePath);
+        placeHTML(root, filePath, dataManager, out);
+    }
+    
+    
+    /**
+     * Recursive Helper method for the export data in order to export the HTML to the index.html file
+     * 
+     * @param root current TreeItem node being operated on
+     * @param filePath The current file being worked on
+     * @param data the data manager
+     * @param out the passed PrintWriter
+     * 
+     */
+    
+    public void placeHTML(TreeItem root, String filePath, DataManager data, PrintWriter out)throws IOException{
+        //PrintWriter out = new PrintWriter(filePath);//LOAD THE PRINTER
+        String valueString = root.getValue().toString();//GET THE VALUE OF THE ROOT(CURRENT) TREEITEM
+        HTMLTagPrototype tempTag = (HTMLTagPrototype) root.getValue();
+        String tagNameCrop;
+        if(("Text".equals(valueString) == false)){//ONLY THE TEXT TAG DOES NOT NEED TO BE ADDED
+            //out.print(valueString);//ADD THE TAG
+            tagNameCrop = valueString.substring(1,(valueString.length() - 1));//Tag name without the brackets
+        }else{
+            tagNameCrop = "text";//Text Tag is separate because of no <>
+        }
+        //GET THE ATTRIBUTES
+        //HTMLTagPrototype tempTag = data.getTag(tagNameCrop);
+        HashMap tempAttributes = tempTag.getAttributes();    
+        if(tempAttributes.isEmpty()){//NO ATTRIBUTES THEN JUST ADD THE TAG
+            out.println(valueString);
+            out.flush();
+        }else{//IT HAS ATTRIBUTES 
+            String finalPrint = "<" + tagNameCrop;
+            if(tempAttributes.containsKey("REL")){
+                finalPrint += (" REL=" + "\"" + (tempTag.getAttribute("REL")) + "\" ");
+                finalPrint += ("TYPE=" + "\"" + (tempTag.getAttribute("TYPE")) +"\" ");
+            }
+            if(tempAttributes.containsKey("href")){
+                finalPrint += (" href = " +"\"" + (tempTag.getAttribute("href")) + "\">");
+            }
+            if(tempAttributes.containsKey("src")){
+                finalPrint +=(" src = " + "\"" + (tempTag.getAttribute("src")) + "\"");
+                finalPrint += (" alt = " + "\"" + (tempTag.getAttribute("alt")) + "\">");
+            }
+            if(tempAttributes.containsKey("class")){
+                finalPrint += (" class = " + "\"" + (tempTag.getAttribute("class")) +"\"");
+                finalPrint += (" id = " + "\"" + (tempTag.getAttribute("id")) + "\">");
+            }
+            if(tempAttributes.containsKey("text")){
+                finalPrint = tempTag.getAttribute("text");
+            }
+            
+            //DONE WITH ALL POSSIBLE ATTRIBUTES
+            out.println(finalPrint);
+            out.flush();
+        }
+        
+        int numChildren = root.getChildren().size();//NOW TIME TO MOVE TO THE NEXT TREE ITEMS IF THIS ONE HAS CHILDREN
+        for(int i = 0; i < numChildren; i++){
+            if(root.getChildren().get(i) != null){
+                TreeItem nextRoot = (TreeItem)root.getChildren().get(i);
+                placeHTML(nextRoot,filePath, data, out);
+            }
+        }
+        if(tempTag.hasClosingTag()){
+            out.println("</" +tagNameCrop + ">");
+            out.flush();
+        }
     }
     
     /**
@@ -234,6 +304,7 @@ public class FileManager implements AppFileComponent {
 	PrintWriter out = new PrintWriter(filePath);
 	out.print(cssContent);
 	out.close();
+        
     }
     
     /**

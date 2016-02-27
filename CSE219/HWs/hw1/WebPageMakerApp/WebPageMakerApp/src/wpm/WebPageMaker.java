@@ -20,7 +20,7 @@ import wpm.gui.Workspace;
  * JavaFX application.
  * 
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public class WebPageMaker extends AppTemplate {

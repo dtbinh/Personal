@@ -187,6 +187,7 @@ public class AppFileController {
 
             // IF THE USER REALLY WANTS TO EXIT THE APP
             if (continueToExit) {
+                //FileManager a = (FileManager)app.getFileComponent();
                 // EXIT THE APPLICATION
                 System.exit(0);
             }

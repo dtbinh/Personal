@@ -6,7 +6,7 @@ import java.util.HashMap;
  * This class represents a single element (i.e. tag) in an HTML tree.
  *
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public class HTMLTagPrototype implements Comparable<HTMLTagPrototype>, Cloneable {

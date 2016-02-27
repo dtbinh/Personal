@@ -26,7 +26,7 @@ import wpm.gui.Workspace;
  * editing them.
  *
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public class PageEditController {
@@ -75,7 +75,6 @@ public class PageEditController {
      */
     public void handleAttributeUpdate(HTMLTagPrototype selectedTag, String attributeName, String attributeValue) {
 	if (enabled) {
-            //System.out.print("Selected something");
 	    try {
 		// FIRST UPDATE THE ELEMENT'S DATA
 		selectedTag.addAttribute(attributeName, attributeValue);
@@ -83,10 +82,11 @@ public class PageEditController {
 		// THEN FORCE THE CHANGES TO THE TEMP HTML PAGE
 		FileManager fileManager = (FileManager) app.getFileComponent();
 		fileManager.exportData(app.getDataComponent(), TEMP_PAGE);
-
+                //Reload the page
 		// AND FINALLY UPDATE THE WEB PAGE DISPLAY USING THE NEW VALUES
 		Workspace workspace = (Workspace) app.getWorkspaceComponent();
 		workspace.getHTMLEngine().reload();
+                //workspace.reloadWorkspace();
 	    } catch (IOException ioe) {
 		// AN ERROR HAPPENED WRITING TO THE TEMP FILE, NOTIFY THE USER
 		PropertiesManager props = PropertiesManager.getPropertiesManager();
@@ -109,7 +109,6 @@ public class PageEditController {
             // GET THE TREE TO SEE WHICH NODE IS CURRENTLY SELECTED
 	    TreeView tree = workspace.getHTMLTree();
 	    TreeItem selectedItem = (TreeItem) tree.getSelectionModel().getSelectedItem();
-            System.out.println(selectedItem);
 	    HTMLTagPrototype selectedTag = (HTMLTagPrototype) selectedItem.getValue();
 
 	    // MAKE A NEW HTMLTagPrototype AND PUT IT IN A NODE
@@ -157,6 +156,7 @@ public class PageEditController {
 
 		// WRITE OUT THE TEXT TO THE CSS FILE
 		FileManager fileManager = (FileManager) app.getFileComponent();
+                //System.out.println(cssContent);
 		fileManager.exportCSS(cssContent, TEMP_CSS_PATH);
 
 		// REFRESH THE HTML VIEW VIA THE ENGINE
@@ -173,5 +173,6 @@ public class PageEditController {
 	}
         
         
+       
     }
 }
