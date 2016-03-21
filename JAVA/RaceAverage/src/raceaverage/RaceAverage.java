@@ -100,6 +100,8 @@ public class RaceAverage {
            
         }
         //ALL THE STRINGS HAVE BEEN ADDED TO THE LIST
+        //COMPUTE AND PRINTOUT
+        System.out.print("Resulting average number of minutes for each boat:  ");
         System.out.println(avgMinutes(list));
         
     }
