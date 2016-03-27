@@ -1,0 +1,43 @@
+<!--RONALD BALCHAND
+109806273
+IN CLASS ASSINGMENT 2-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <style media="screen">
+      body{
+        background-color: white;
+      }
+    </style>
+    <title></title>
+  </head>
+
+  <body id="b">
+    <input type="button" value  = "Click Me" onclick="hailstone();">
+    <input type="button" value = "Change Color" onclick = "recolor();">
+    <script type="text/javascript">
+
+    function hailstone(){
+      var number = prompt("Enter a number");
+      while(number > 1){
+        alert("Current sequence number is " + number);
+        if((number%2) == 0){
+          number/= 2;
+        }else{
+          number = 3 * number + 1;
+        }
+      }
+      alert(number);
+    }
+
+    function recolor(){
+      var colors = ["orange", "yellow", "green", "brown", "gray"];
+      var pos = Math.floor(Math.random() * colors.length);
+      var body = document.getElementById("b");
+      body.style.backgroundColor = colors[pos];
+    }
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,40 @@
+/*RONALD BALCHAND
+#109806273
+CSE 102
+EXTERNAL STYLESHEETS
+ALL PAGES IN THIS HOMEWORK DRAW INFLUENCE FROM HERE
+*/
+
+
+.headers{
+ text-align: center;
+
+}
+
+
+.images{
+  align-content: center;
+}
+
+html{
+  background-color: black;
+  border: 10px solid gold;
+  color: white;
+
+}
+
+.centered{
+  text-align: center;
+}
+
+ul.menu{ list-style-type: right; position: fixed; right: 10px;
+  top:350px; float: right; width: 15%; background-color: red;
+}
+
+ul.menu li { /*padding: 10px;*/ background-color: red;
+float: right; margin: 5px; display:right;
+}
+
+a{
+  color: black;
+}
