@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+int main(){
+  
+  FILE *fd1;
+  fd1 = fopen("image.ppm");
+  int r,g,b;
+  int pixel1;
+  int pixel2;
+  fprintf( fd1, "P3\n");
+  fprintf(fd1, "%d %d \n", 500, 500);
+  fprintf(fd1, "225\n");
+  srand(time(NULL));
+  for(pixel1 = 0; pixel1 < 500; pixel1++){
+    for (pixel2 = 0; pixel2<500; pixel2++){
+      r = rand() % 55 + 200;
+      g = rand() % 55 + 200;
+      b = rand() % 55 + 200;
+      fprintf(fd1, " %d %d %d ", r, g, b);
+    }
+  }
+  return 0;
+}

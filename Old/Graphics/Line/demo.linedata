@@ -1,0 +1,42 @@
+# This command file will create demo.ppm containing 2 lines: a red vertical one down the center of the screen...
+#   and another from the lower-left to the upper-right of the screen.
+# Demo of language
+# all commands are single-letters at beginning of the line
+# # starts a comment
+# c = start new color (default is 0 0 0). Next line is R, G, B each in the range 0-255.  This color below is gray.
+c
+127 127 127
+# l = draw line between 2 points. Next line is x1, y1, x2, y2, each in the range 0-499
+#    x goes from left to right, y goes from top to bottom.  So (499 0) is top-right corner
+#    and (0 499) is bottom left corner.
+# The line below is vertical down the center of the screen.
+l
+249 0 249 499
+# The line below will be green, between the lower-left and upper-right of the screen.
+c
+0 255 0
+l
+0 499 499 0
+c
+255 0 0
+l
+0 0 499 249
+c
+0 0 255
+l
+0 0 249 499
+c
+0 255 0
+l 
+0 499 499 248
+c
+255 255 255
+l
+0 499 499 0
+c
+100 100 100
+# g = Output to graphics (PPM) file.  Next line contains name of the graphics file.  
+g
+demo.ppm
+# q = quit
+q

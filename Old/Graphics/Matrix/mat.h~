@@ -1,0 +1,19 @@
+struct mat4{ 
+  int cols;
+  double *cells;
+};
+
+
+
+typedef struct mat4 Mat4;
+
+
+Mat4 *mat4_create(int ncolumns);
+void mat4_delete(Mat4 *m);
+Mat4 *mat4_create_identity();
+Mat4 *mat4_copy(Mat4 *original);
+Mat4 *mat4_add_column(Mat4 *old, double *new_cells);
+Mat4 *mat4_set(Mat4 *matrix, int row, int col, double value);
+double mat4_get(Mat4 *matrix, int row, int col);
+int mat4_columns(Mat4 *m);
+void mat4_print(char *s, Mat4 *matrix);

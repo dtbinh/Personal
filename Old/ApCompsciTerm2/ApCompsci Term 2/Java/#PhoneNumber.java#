@@ -1,0 +1,62 @@
+
+public class PhoneNumber{
+
+    //instance variables 
+    private String _areacode, _prefix, _lineNumber;
+
+    // default constructor
+    //postcondition: default phone Number : 999-999-9999
+    public PhoneNumber (){
+	_areacode = "999";
+	_prefix = "999";
+	_lineNumber = "9999";
+    }
+}
+//overloaded constructor
+//precondition: areaCode and prefix are of form NXX, lineNUmber is XXX
+
+public PhoneNumber { String areaCode, String prefix, String lineNumber) {
+    _areaCode = areaCode;
+    _prefix = prefix;
+    _lineNumber = lineNumber; // three lines are only contained to this part of code.
+}
+
+// areaCode and prefix are of of thefor NXX
+public PhoneNumber (int areaCode, int prefix, String lineNumber){
+    this( areaCode + "", prefix + "", lineNumber);
+}
+
+//accessor methods
+public String getAreaCode (){
+    return _area;
+public String prefixCode (){
+    return _prefix;
+public String LineNumberCode (){
+    return _line;
+}
+
+//postconditon: verifies if the areaCode of a Phone Number is the form of NXX
+//precondition: the charqacters in _areaCode are all digits
+public boolean hasValidAreaCode ()
+
+//overloaded toString
+//returns a String NXX-NXX-XXXX\
+
+public String toString (){
+    _return (_areaCode + "-" + _prefix + "-" + _lineNumber);
+}
+
+public static void main (String [] args){
+    PhoneNumber a = new PhoneNumber ();
+    PhoneNumber b = new PhoneNumber ("212", "312", "0230");
+    PhoneNumber c = new PhoneNumber (413, 781, 0090);
+
+    System.out.println ("a: " + a);
+    System.out.println ("b: " + b);
+    System.out.println ("c: " + c);
+}
+
+
+
+
+}

@@ -1,0 +1,17 @@
+import java.util.Random;
+
+public class DNA{
+
+    public static final String SEQLETTERS = "AGCT";
+
+    public static String genDNASeq(int n){
+	String ans = " ";
+	Random temp = new Random();
+	for(int i = 0; i < n; i++){
+	    int random = temp.nextInt(4);
+	    ans += SEQLETTERS.substring(temp, temp + 1);
+	}
+	return ans;
+    }
+
+public 

@@ -1,0 +1,82 @@
+public class Person {
+
+    //instance variables
+    private String _firstName, _lastName;
+    private Face _myFace;
+
+    //constructor
+
+    public Person (){
+	_firstName = "John";
+	_lastName = "Doe";
+	_myface = new Face ();
+    } 
+
+    public Person (String firstName, String lastName) {
+	this(); 	// calls Person()
+	_firstName = firstName;
+   	_lastName = lastName;
+    }
+
+    public Person (String firstName, String lastName, Face face){
+	this (firstName, lastName);
+	_myFace = face;
+    }
+
+    public String getFirstName () {
+	return _firstName;
+    }
+    public String getLastName() {
+	return _lastName;
+    }
+    public Face getFace(){
+	return _myface;
+    }
+
+    public String setFirstName (String firstName){
+	String old = _firstName;
+	_firstName = firstName;
+	return old;
+    }
+    public String setLastName (String lastName){
+	String old = _lastName ();
+	_lastName = lastName;
+	return old; 
+    }
+
+
+    public face setFace (Face newFace){
+	String old = _myFace ();
+	myFace = newFace;
+	return old;
+    }
+
+    //  public static void main (String[] args){
+    //  
+    public String toString () {
+	return _myFace + "\n" + _firstName + "" + _lastName;
+    }
+    public static void main (String [] args) {
+	Person p1 = new Person ();
+	Person p2 = new Person ("Mary", "Lee");
+	Peron p3 = new Person ("Gary", "Smith", new Face("||||||",
+							 "| x 0 |",
+							 "| (0) |",
+							 "|  v  |"));
+	System.out.println (p1);
+	System.out.println (p2);
+	System.out.println (p3);
+
+	p2.getface ().setHair ("//////");
+	//Person
+	//pt.getFace () -> Face
+	System.out.println(p2);
+	//Swap first names of p1 and p2
+    }
+
+
+
+}
+
+
+//Changd Person p2's hairstyle to "///////"

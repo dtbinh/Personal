@@ -1,0 +1,14 @@
+import wheels.users.Ellipse;
+import wheels.users.Frame;
+import java.awt.Color;
+
+public class sun extends Frame {
+
+    private Ellipse _sun;
+
+    public sun() {
+
+	_sun = new Ellipse();
+	_sun.setColor (Color.White);
+	_sun.setSize (100,100);
+_sun.setLocation 

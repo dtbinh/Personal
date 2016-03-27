@@ -1,0 +1,177 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "parse_util.h"
+#include "mat4.h"
+
+
+#define ROWS 600
+#define COLS 600
+#define TRUE 1
+#define FALSE 0
+#define PI 3.141592653589793238462643383
+
+
+
+typedef struct pixel {
+
+  int r;
+  int g;
+  int b;
+}
+ pixel;
+
+char* pixeltostring(pixel pix) {
+  char* str = malloc(sizeof(char) * 15);
+  sprintf(str, "%d %d %d ", pix.r, pix.g, pix.b);
+  return str;
+}
+
+
+pixel Pixels[ROWS][COLS];
+
+
+double x_left, y_bottom, x_right, y_top;
+// pixel** Pixels;
+
+//int ROWS, COLS;
+
+
+//  -------------------------------- DrawLine ---------------------------------
+int DrawLine(int data[], int r, int g, int b) {
+  int x1, y1, x2, y2, i;
+  int up, dx, dy, acc;
+  pixel color = (pixel){r, g, b};
+  //return TRUE;
+  for (i = 0; i < 4; i+=2)
+    if (data[i] < 0 || data[i] >= COLS || data[i+1] < 0 || data[i+1] >= ROWS)
+      return FALSE;
+
+  x1 = data[0];
+  y1 = data[1];
+  x2 = data[2];
+  y2 = data[3];
+
+  // just a point?
+  if (x1 == x2 && y1 == y2) {
+    Pixels[y1][x1] = color;
+    return TRUE;
+  }
+
+  // X-major?
+  if (abs(x1-x2) >= abs(y1-y2)) {
+    // if x1 > x2, reverse direction
+    if (x1 > x2) {
+      swap(&x1, &x2);
+      swap(&y1, &y2);
+    }
+    dx = x2 - x1;
+    dy = abs(y2 - y1);
+    acc = dx >> 1;  // starting accumulator
+    //printf("X-major\n");
+    while (x1 <= x2) {
+      if (x1 < 0 || x1 >= COLS || y1 < 0 || y1 >= ROWS) {
+	printf("out of bounds: %d,%d\n",x1,y1);
+	return FALSE;
+      }
+      Pixels[y1][x1] = color;
+      ++x1;
+      acc += dy;
+      if (acc >= dx) {
+	if (y2 >= y1)
+	  ++y1;
+	else
+	  --y1;
+	acc -= dx;
+      }
+    }
+  }
+  else {  // Y-major
+    // if y1 > y2, reverse direction
+    if (y1 > y2) {
+      swap(&y1, &y2);
+      swap(&x1, &x2);
+    }
+    dy = y2 - y1;
+    dx = abs(x2 - x1);
+    acc = dy >> 1;  // starting accumulator
+    while (y1 <= y2) {
+      Pixels[y1][x1] = color;
+      ++y1;
+      acc += dx;
+      if (acc >= dy) {
+	if (x2 >= x1)
+	  ++x1;
+	else
+	  --x1;
+	acc -= dy;
+      }
+    }
+  }
+  return TRUE;
+}
+
+// -------------------------------- abs --------------------------------
+int abs(int n) {
+  if (n >= 0)
+    return n;
+  return -n;
+}
+
+// ------------------------------------ swap -------------------------
+void swap(int *a, int *b) {
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
+Mat4 * matrix_Mult(Mat4 *matrix1, Mat4 * matrix2){
+  //assume matrix1 == transformation & matrix2 == edge
+  int c, d, k;
+  int col1, col2, row2;
+  double sum = 0;
+
+  col1 = mat4_columns(matrix1);
+  col2 = mat4_columns(matrix2);
+
+  row2 = 4;
+  //number cols depend on second matrix
+  Mat4 * result = mat4_create( mat4_columns(matrix2));
+
+  for ( c = 0 ; c < 4; c++ ){
+    for ( d = 0 ; d < col2 ; d++ ){
+      for ( k = 0 ; k < col1 ; k++ ){
+	sum = sum + mat4_get(matrix1, c, k) * mat4_get(matrix2, k, d);
+      }
+      mat4_set(result, c, d, sum);
+
+      sum = 0;
+    }
+  }
+
+  return result;
+
+}
+
+int convert_screen(double num, char  * c){
+  double px_left, py_bottom, px_right, py_top;
+  double result;
+
+  px_left = 0;
+  py_bottom = -ROWS +1;
+  px_right = COLS - 1;
+  py_top = 0;
+
+
+  if(strcmp(c, "x")==0){
+    result = (((px_right - px_left)/(x_right - x_left)) * (num - x_left)) + px_left ;
+  }
+  if(strcmp(c, "y")==0){
+    result = (((py_top - py_bottom)/(y_top - y_bottom)) *(num - y_bottom))+ py_bottom;
+  }
+  return (int)result;
+}
+
+
+
