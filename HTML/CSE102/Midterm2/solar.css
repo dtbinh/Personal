@@ -1,0 +1,14 @@
+#content{
+  margin-left: 25%;
+  margin-right: 25%;
+  background-color: whitesmoke;
+}
+
+.yellow{
+  background-color: lightyellow;
+}
+
+.purple{
+  background-color: violet;
+  text-align: center;
+}
