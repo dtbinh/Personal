@@ -16,7 +16,8 @@ td { padding: 10px;
 <table>
     <tr>
         <td>Invert Colors:</td>
-        <td><input type="checkbox" id="toggle"></td>
+        <td><input type="checkbox" id="toggle"
+          onclick="invert(this);"></td>
     </tr>
 </table>
 
@@ -25,7 +26,8 @@ You can find the source code for this website hosted on GitHub. We’d also like
 
 <table>
     <tr>
-        <td><img src="images/debian.png" width=100 height=100></td>
+        <td><img src="images/debian.png" width=100 height=100
+          onclick = "alert("Debian rocks");"></td>
         <td><b>Debian</b>
             <p>Our web servers run on Debian: a secure and highly reliable flavor of Linux.</p>
         </td>
@@ -45,9 +47,10 @@ You can find the source code for this website hosted on GitHub. We’d also like
         </td>
     </tr>
     <tr>
-        <td><img src="images/php-logo.png" width=100 height=100></td>
+        <td><img src="images/php-logo.png" width=100 height=100
+          onclick="makeBold()"></td>
         <td><b>PHP</b>
-            <p>One of the more popular scripting languages for web development, this site is mostly written in PHP.</p>
+            <p><span id = "exam2">One of the more popular scripting languages for web development, this site is mostly written in PHP.</span></p>
         </td>
         <td><img src="images/lora-sample.png" width=100 height=100></td>
         <td><b>Lora</b>
@@ -67,7 +70,19 @@ You can find the source code for this website hosted on GitHub. We’d also like
 <script>
     function invert(toggle)
     {
-        // ADD YOUR CODE HERE
+        var ref = document.getElementById("body");
+        if(toggle.checked == true){
+          ref.style.color = "white";
+          ref.style.backgroundColor = "blue";
+        }else{
+          ref.style.color = "blue";
+          ref.style.backgroundColor = "white";
+        }
+    }
+
+    function makeBold(){
+      var ref = document.getElementById("exam2");
+      ref.style.fontWeight = "bold";
     }
 
 
