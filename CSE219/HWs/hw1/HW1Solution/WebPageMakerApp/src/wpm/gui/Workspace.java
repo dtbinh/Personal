@@ -125,7 +125,6 @@ public class Workspace extends AppWorkspaceComponent {
 	// KEEP THE GUI FOR LATER
 	gui = app.getGUI();
         
-
 	// THIS WILL PROVIDE US WITH OUR CUSTOM UI SETTINGS AND TEXT
 	PropertiesManager propsSingleton = PropertiesManager.getPropertiesManager();
 

@@ -5,6 +5,9 @@ package jclassdesigner;
 
 import java.util.Locale;
 import static javafx.application.Application.launch;
+import jclassdesigner.data.DataManager;
+import jclassdesigner.file.FileManager;
+import jclassdesigner.gui.Workspace;
 import saf.AppTemplate;
 import saf.components.AppComponentsBuilder;
 import saf.components.AppDataComponent;
@@ -45,7 +48,7 @@ public class JClassDesigner extends AppTemplate{
 	     */
 	    @Override
 	    public AppDataComponent buildDataComponent() throws Exception {
-		return new DataManager(jClassDesigner.this);
+		return new DataManager(JClassDesigner.this);
 	    }
 
 	    /**
