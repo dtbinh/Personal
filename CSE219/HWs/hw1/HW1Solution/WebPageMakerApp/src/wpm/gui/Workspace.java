@@ -33,6 +33,8 @@ import saf.ui.AppGUI;
 import wpm.data.HTMLTagPrototype;
 import saf.AppTemplate;
 import saf.components.AppWorkspaceComponent;
+import static saf.settings.AppPropertyType.NEW_ICON;
+import static saf.settings.AppPropertyType.NEW_TOOLTIP;
 import wpm.PropertyType;
 import static wpm.PropertyType.TEMP_PAGE_LOAD_ERROR_MESSAGE;
 import static wpm.PropertyType.TEMP_PAGE_LOAD_ERROR_TITLE;
@@ -122,6 +124,7 @@ public class Workspace extends AppWorkspaceComponent {
 
 	// KEEP THE GUI FOR LATER
 	gui = app.getGUI();
+        
 
 	// THIS WILL PROVIDE US WITH OUR CUSTOM UI SETTINGS AND TEXT
 	PropertiesManager propsSingleton = PropertiesManager.getPropertiesManager();
