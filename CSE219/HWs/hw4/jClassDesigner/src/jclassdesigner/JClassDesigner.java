@@ -35,6 +35,7 @@ public class JClassDesigner extends AppTemplate{
      * @return the builder object that knows how to create the proper components
      * for this custom application.
      */
+    @Override
     public AppComponentsBuilder makeAppBuilderHook() {
 	return new AppComponentsBuilder() {
 	    /**
@@ -76,7 +77,7 @@ public class JClassDesigner extends AppTemplate{
 	     */
 	    @Override
 	    public AppWorkspaceComponent buildWorkspaceComponent() throws Exception {
-		return new Workspace(PoseMaker.this);
+		return new Workspace(JClassDesigner.this);
 	    }
 	};
     }

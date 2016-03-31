@@ -27,7 +27,6 @@ public class FileManager implements AppFileComponent{
      * @throws IOException Thrown should there be an error reading
      * in data from the file.
      */
-    @Override
     public void loadData(AppDataComponent data, String filePath) throws IOException {
     }
 
@@ -74,7 +73,6 @@ public class FileManager implements AppFileComponent{
      * This method is provided to satisfy the compiler, but it
      * is not used by this application.
      */
-    @Override
     public void importData(AppDataComponent data, String filePath) throws IOException {
 	// NOTE THAT THE Web Page Maker APPLICATION MAKES
 	// NO USE OF THIS METHOD SINCE IT NEVER IMPORTS

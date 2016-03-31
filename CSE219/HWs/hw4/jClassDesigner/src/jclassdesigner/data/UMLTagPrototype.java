@@ -12,6 +12,8 @@ import java.util.HashMap;
 public class UMLTagPrototype {
     //FIRST SOME CONSTANTS
     
+    //public static final String
+    
      String className;
      String packageName;
      

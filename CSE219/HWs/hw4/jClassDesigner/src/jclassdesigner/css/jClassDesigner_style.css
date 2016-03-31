@@ -1,0 +1,37 @@
+/*
+This style sheet stylizes the controls inside our
+JClassDesigner JavaFX Application. Note that conreolls
+in the UI must have the same class as those bel;ow in 
+order to be rendered using those properties.
+*/
+/* 
+    
+    Author:     Ronald Balchand
+    Version:    1.0 
+*/
+
+.toolbar{
+    -fx-background-color: #00FFFF;
+    -fx-border-width: 3px;
+    -fx
+}
+
+.toolbar_button{
+    -fx-padding: 10;
+    -fx-background-color:  #A9A9A9;
+    -fx-background-radius: 5;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    
+}
+
+render_canvas{
+    
+}
+
+component_editor{
+    
+}
+
+

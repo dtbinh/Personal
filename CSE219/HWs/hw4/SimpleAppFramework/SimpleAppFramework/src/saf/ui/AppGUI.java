@@ -22,13 +22,15 @@ import saf.components.AppStyleArbiter;
 /**
  * This class provides the basic user interface for this application,
  * including all the file controls, but not including the workspace,
- * which would be customly provided for each app.
+ * which would be customly provided for each app.Note that this Framework has
+ * been edited for the jClass Designer JavaFX Application
  * 
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public class AppGUI implements AppStyleArbiter {
+    static final String CLASS_BLUE_BACKGROUND = "blue_background";
     // THIS HANDLES INTERACTIONS WITH FILE-RELATED CONTROLS
     protected AppFileController fileController;
 
@@ -42,12 +44,12 @@ public class AppGUI implements AppStyleArbiter {
     // APPLICATION AppGUI
     protected BorderPane appPane;
     
-    // THIS IS THE TOP TOOLBAR AND ITS CONTROLS
-    protected FlowPane fileToolbarPane;
+    // THIS IS THE TOP LEFT TOOLBAR AND ITS CONTROLS
+    public FlowPane fileToolbarPane;
     protected Button newButton;
-    protected Button loadButton;
     protected Button saveButton;
     protected Button exitButton;
+    
     
     // HERE ARE OUR DIALOGS
     protected AppYesNoCancelDialogSingleton yesNoCancelDialog;
@@ -64,9 +66,7 @@ public class AppGUI implements AppStyleArbiter {
      * 
      * @param app The app within this gui is used.
      */
-    public AppGUI(  Stage initPrimaryStage, 
-		    String initAppTitle, 
-		    AppTemplate app){
+    public AppGUI(Stage initPrimaryStage, String initAppTitle,AppTemplate app){
 	// SAVE THESE FOR LATER
 	primaryStage = initPrimaryStage;
 	appTitle = initAppTitle;
@@ -76,6 +76,14 @@ public class AppGUI implements AppStyleArbiter {
 		
         // AND FINALLY START UP THE WINDOW (WITHOUT THE WORKSPACE)
         initWindow();
+    }
+    
+    /**
+     * Accessor method for getting the file toolbar pane
+     * @return The FlowPane file toolbarPane
+     */
+    public FlowPane getFileToolbar(){
+        return fileToolbarPane;
     }
     
     /**
@@ -94,8 +102,8 @@ public class AppGUI implements AppStyleArbiter {
      * 
      * @return This application's window's scene.
      */
-    public Scene getPrimaryScene() { 
-        return primaryScene;
+    public Scene getPrimaryScene() {
+        return primaryScene; 
     }
     
     /**
@@ -104,7 +112,9 @@ public class AppGUI implements AppStyleArbiter {
      * 
      * @return This application's primary stage (i.e. window).
      */    
-    public Stage getWindow() { return primaryStage; }
+    public Stage getWindow() {
+        return primaryStage; 
+    }
 
     /**
      * This method is used to activate/deactivate toolbar buttons when
@@ -116,11 +126,13 @@ public class AppGUI implements AppStyleArbiter {
         // THIS TOGGLES WITH WHETHER THE CURRENT COURSE
         // HAS BEEN SAVED OR NOT
         saveButton.setDisable(saved);
+        if(saved == false){
+            fileController.markFileAsNotSaved();
+        }
 
         // ALL THE OTHER BUTTONS ARE ALWAYS ENABLED
         // ONCE EDITING THAT FIRST COURSE BEGINS
 	newButton.setDisable(false);
-        loadButton.setDisable(false);
 	exitButton.setDisable(false);
 
         // NOTE THAT THE NEW, LOAD, AND EXIT BUTTONS
@@ -137,11 +149,14 @@ public class AppGUI implements AppStyleArbiter {
      */
     private void initFileToolbar(AppTemplate app) {
         fileToolbarPane = new FlowPane();
+        fileToolbarPane.getStyleClass().add(CLASS_BLUE_BACKGROUND);
+        
+        //fileToolbarPane.getStyleClass()
+        
 
         // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
         // START AS ENABLED (false), WHILE OTHERS DISABLED (true)
         newButton = initChildButton(fileToolbarPane,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
-        loadButton = initChildButton(fileToolbarPane,	LOAD_ICON.toString(),	    LOAD_TOOLTIP.toString(),	false);
         saveButton = initChildButton(fileToolbarPane,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
         exitButton = initChildButton(fileToolbarPane,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
 
@@ -150,11 +165,10 @@ public class AppGUI implements AppStyleArbiter {
         newButton.setOnAction(e -> {
             fileController.handleNewRequest();
         });
-        loadButton.setOnAction(e -> {
-            fileController.handleLoadRequest();
-        });
         saveButton.setOnAction(e -> {
-            fileController.handleSaveRequest();
+            if(fileController.isSaved() == false){                    
+                fileController.handleSaveRequest();
+            }
         });
         exitButton.setOnAction(e -> {
             fileController.handleExitRequest();
@@ -182,7 +196,6 @@ public class AppGUI implements AppStyleArbiter {
         // HAS BEEN CONSTRUCTED, BUT WON'T BE ADDED UNTIL
         // THE USER STARTS EDITING A COURSE
         appPane = new BorderPane();
-        
         appPane.setTop(fileToolbarPane);
         primaryScene = new Scene(appPane);
         
@@ -238,14 +251,16 @@ public class AppGUI implements AppStyleArbiter {
      */
     @Override
     public void initStyle() {
-	fileToolbarPane.getStyleClass().add(CLASS_BORDERED_PANE);
+	fileToolbarPane.getStyleClass().add(CLASS_TOOLBAR);
 	newButton.getStyleClass().add(CLASS_FILE_BUTTON);
-	loadButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	saveButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	exitButton.getStyleClass().add(CLASS_FILE_BUTTON);
     }
     
-    public FlowPane getToolbarPane(){
+    /**
+     * This function allows access to the file toolbar at the top of the application
+     **/
+     public FlowPane getToolbarPane(){
         return this.fileToolbarPane;
     }
 }
