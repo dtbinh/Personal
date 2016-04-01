@@ -5,7 +5,7 @@ package saf.components;
  * the style for some set of controls, like the workspace, for example.
  * 
  * @author Richard McKenna
- * @author ?
+ * @author Ronald Balchand
  * @version 1.0
  */
 public interface AppStyleArbiter {
@@ -16,6 +16,7 @@ public interface AppStyleArbiter {
     public static final String CLASS_PROMPT_LABEL = "prompt_label";
     public static final String CLASS_PROMPT_TEXT_FIELD = "prompt_text_field";
     public static final String CLASS_FILE_BUTTON = "file_button";
-    
+    //Adding another one for the different extra toolbar
+    public static final String CLASS_FILE_TOOLBAR = "file_toolbar";
     public void initStyle();
 }

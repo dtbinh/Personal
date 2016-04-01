@@ -32,6 +32,7 @@ import saf.components.AppStyleArbiter;
  */
 public class AppGUI implements AppStyleArbiter {
     static final String CLASS_BLUE_BACKGROUND = "blue_background";
+    
     // THIS HANDLES INTERACTIONS WITH FILE-RELATED CONTROLS
     protected AppFileController fileController;
 
@@ -52,6 +53,7 @@ public class AppGUI implements AppStyleArbiter {
     protected Button newButton;
     protected Button loadButton;
     protected Button saveButton;
+    protected Button saveAsButton;
     protected Button exitButton;
     
     protected HBox customButtons;
@@ -167,7 +169,19 @@ public class AppGUI implements AppStyleArbiter {
         // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
         // START AS ENABLED (false), WHILE OTHERS DISABLED (true)
         newButton = initChildButton(fileInteractToolbar,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
+        loadButton = initChildButton(fileInteractToolbar,       LOAD_ICON.toString(),        LOAD_TOOLTIP.toString(),     false);
         saveButton = initChildButton(fileInteractToolbar,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
+        saveButton = initChildButton(fileInteractToolbar,       SAVE_AS_ICON.toString(),    SAVE_AS_TOOLTIP.toString(), true);
+        //must insert the custom buttons
+        
+        customButtons = new HBox();
+        customButton1 = new Button();
+        customButton1.setText("C");
+        customButton2 = new Button();
+        customButton2.setText("C");
+        
+        fileInteractToolbar.getChildren().add(customButtons);
+        //Now for that Exit Button
         exitButton = initChildButton(fileInteractToolbar,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
 
 	// AND NOW SETUP THEIR EVENT HANDLERS
@@ -261,7 +275,7 @@ public class AppGUI implements AppStyleArbiter {
      */
     @Override
     public void initStyle() {
-	fileToolbarPane.getStyleClass().add(CLASS_TOOLBAR);
+	fileToolbarPane.getStyleClass().add(CLASS_FILE_TOOLBAR);
 	newButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	saveButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	exitButton.getStyleClass().add(CLASS_FILE_BUTTON);

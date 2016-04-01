@@ -31,7 +31,7 @@ instantiated for the workspace, which is customizable.
          <property name="NEW_TOOLTIP"		value="Create a New jClass Design"></property>
         <property name="LOAD_TOOLTIP"		value="Load an Existing jClass Design"></property>
         <property name="SAVE_TOOLTIP"		value="Save this jClass Design"></property>
-        <property name="SAVEAS_TOOLTIP"         value="Save this jClass Design"></property>
+        <property name="SAVE_AS_TOOLTIP"         value="Save this jClass Design"></property>
         <property name="EXIT_TOOLTIP"		value="Exit the Application"></property>
         <property name="SELECTION_TOOL_TOOLTIP"	    value="Use Shape Selection Tool"></property>
         <property name="REMOVE_ELEMENT_TOOLTIP"	    value="Remove Element"></property>

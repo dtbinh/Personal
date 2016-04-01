@@ -16,6 +16,10 @@ order to be rendered using those properties.
     
 }
 
+.file_toolbar{
+    
+}
+
 .toolbar_button{
     -fx-padding: 10;
     -fx-background-color:  #A9A9A9;

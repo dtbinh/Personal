@@ -41,6 +41,10 @@ public class Workspace extends AppWorkspaceComponent{
     //THIS HANDLES INTERACTIONS WITH THE COMPONENT TOOLBAR
     ComponentEditController componentEditController;
     
+    //THESE TWO BUTTONS WILL BE SENT TO THE GUI AS THE CUSTOM BUTTONS
+    Button photoButton;
+    Button codeButton;
+    
     //THIS WILL BE WHERE WE DISPLAY ALL THE STUFF
     Pane canvas;
     

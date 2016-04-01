@@ -17,12 +17,14 @@ public enum AppPropertyType {
         
         // APPLICATION ICONS
         NEW_ICON,
+        LOAD_ICON,
         SAVE_ICON,
 	SAVE_AS_ICON,
         EXIT_ICON,
         
         // APPLICATION TOOLTIPS FOR BUTTONS
         NEW_TOOLTIP,
+        LOAD_TOOLTIP,
         SAVE_TOOLTIP,
 	SAVE_AS_TOOLTIP,
 	EXPORT_TOOLTIP,
