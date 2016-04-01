@@ -6,6 +6,13 @@
 package jclassdesigner.gui;
 
 import java.io.IOException;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import jclassdesigner.controller.CanvasController;
 import jclassdesigner.controller.ComponentEditController;
 import saf.AppTemplate;
@@ -34,13 +41,34 @@ public class Workspace extends AppWorkspaceComponent{
     //THIS HANDLES INTERACTIONS WITH THE COMPONENT TOOLBAR
     ComponentEditController componentEditController;
     
+    //THIS WILL BE WHERE WE DISPLAY ALL THE STUFF
+    Pane canvas;
     
+    //THIS IS WHERE WE COMPONENT STUFF
+    VBox componentToolbar;
     
+    //ROW FOR THE CLASS NAME
+    HBox row1Box;
+    TextField classNameField;
+ 
+    //ROW FOR THE PACKAGE NAME
+    HBox row2Box;
+    TextField classPackageField;
     
+    //ROW FOR THE PARENT CLASS
+    HBox row3Box;
+    ChoiceBox parentChoice = new ChoiceBox();
     
+    //ROW FOR THE VARIABLES
+    HBox row4Box;
+    Button addVariableButton;
+    Button removeVariableButton;
     
-    
-    
+    //ROW FOR THE METHOD
+    HBox row5Box;
+    Button addMethodButton;
+    Button removeMethodButton;
+     
      /**
      * Constructor for initializing the workspace, note that this constructor
      * will fully setup the workspace user interface for use.

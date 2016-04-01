@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -46,9 +47,16 @@ public class AppGUI implements AppStyleArbiter {
     
     // THIS IS THE TOP LEFT TOOLBAR AND ITS CONTROLS
     public FlowPane fileToolbarPane;
+    public FlowPane fileInteractPane;
+    
     protected Button newButton;
+    protected Button loadButton;
     protected Button saveButton;
     protected Button exitButton;
+    
+    protected HBox customButtons;
+    protected Button customButton1;
+    protected Button customButton2;
     
     
     // HERE ARE OUR DIALOGS
@@ -149,16 +157,18 @@ public class AppGUI implements AppStyleArbiter {
      */
     private void initFileToolbar(AppTemplate app) {
         fileToolbarPane = new FlowPane();
-        fileToolbarPane.getStyleClass().add(CLASS_BLUE_BACKGROUND);
+        FlowPane fileInteractToolbar = new FlowPane();
         
-        //fileToolbarPane.getStyleClass()
         
+        //fileToolbarPane.getStyleClass().add(CLASS_BLUE_BACKGROUND);
+        
+     
 
         // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
         // START AS ENABLED (false), WHILE OTHERS DISABLED (true)
-        newButton = initChildButton(fileToolbarPane,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
-        saveButton = initChildButton(fileToolbarPane,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
-        exitButton = initChildButton(fileToolbarPane,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
+        newButton = initChildButton(fileInteractToolbar,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
+        saveButton = initChildButton(fileInteractToolbar,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
+        exitButton = initChildButton(fileInteractToolbar,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
 
 	// AND NOW SETUP THEIR EVENT HANDLERS
         fileController = new AppFileController(app);
@@ -256,11 +266,43 @@ public class AppGUI implements AppStyleArbiter {
 	saveButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	exitButton.getStyleClass().add(CLASS_FILE_BUTTON);
     }
-    
-    /**
-     * This function allows access to the file toolbar at the top of the application
-     **/
-     public FlowPane getToolbarPane(){
-        return this.fileToolbarPane;
-    }
+     
+     /**
+      * This function allows access to the File Interaction toolbar in the fileToolbarPane
+      * @return The current file interaction toolbar
+      */
+     public FlowPane getFileInteractionToolbar(){
+         return this.fileInteractPane;
+     }
+     
+     /**
+      * This function allows the user to access the first custom button in the fileInteractionPane
+      * @return The current 1st Custom Button
+      */
+     
+     public Button getCustom1(){
+         return this.customButton1;
+     }
+     
+     /**
+      * This function allows the user to access the second custom button in the fileInteractionpane
+      * @return The current 2nd Custom Button
+      */
+     
+     public Button getCustom2(){
+         return this.customButton2;
+     }
+     
+     /**
+      * This function allows you to input two buttons to a function and set the two custom buttons to the inputs
+      * @param topButton The button input that will be the top custom button
+      * @param bottomButton The button input that will be the bottom custom button
+      * */
+     
+     public void setupCustoms(Button topButton, Button bottomButton){
+         this.customButton1 = topButton;
+         this.customButton2 = bottomButton;
+     }
+     
+     
 }

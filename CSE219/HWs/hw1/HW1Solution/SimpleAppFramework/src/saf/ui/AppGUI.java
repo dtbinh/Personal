@@ -137,13 +137,26 @@ public class AppGUI implements AppStyleArbiter {
      */
     private void initFileToolbar(AppTemplate app) {
         fileToolbarPane = new FlowPane();
+        FlowPane fileInteractToolbar = new FlowPane();
+        
+        FlowPane twoPane = new FlowPane();
+        Button newButton2 = initChildButton(twoPane,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
+        
+        twoPane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        //fileToolbarPane.getStyleClass().add(CLASS_BLUE_BACKGROUND);
+        
+        fileInteractToolbar.getStyleClass().add(CLASS_BORDERED_PANE);
+         fileToolbarPane.getChildren().add(twoPane);
+        fileToolbarPane.getChildren().add(fileInteractToolbar);
+     
 
         // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
         // START AS ENABLED (false), WHILE OTHERS DISABLED (true)
-        newButton = initChildButton(fileToolbarPane,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
-        loadButton = initChildButton(fileToolbarPane,	LOAD_ICON.toString(),	    LOAD_TOOLTIP.toString(),	false);
-        saveButton = initChildButton(fileToolbarPane,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
-        exitButton = initChildButton(fileToolbarPane,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
+        newButton = initChildButton(fileInteractToolbar,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
+        loadButton = initChildButton(fileInteractToolbar,       LOAD_ICON.toString(),       LOAD_TOOLTIP.toString(),    false);
+        saveButton = initChildButton(fileInteractToolbar,	SAVE_ICON.toString(),	    SAVE_TOOLTIP.toString(),	true);
+        exitButton = initChildButton(fileInteractToolbar,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
 
 	// AND NOW SETUP THEIR EVENT HANDLERS
         fileController = new AppFileController(app);
@@ -159,6 +172,8 @@ public class AppGUI implements AppStyleArbiter {
         exitButton.setOnAction(e -> {
             fileController.handleExitRequest();
         });	
+       // fileToolbarPane.getChildren().add(fileInteractToolbar);
+       // fileToolbarPane.getChildren().add(twoPane);
     }
 
     // INITIALIZE THE WINDOW (i.e. STAGE) PUTTING ALL THE CONTROLS
@@ -182,7 +197,6 @@ public class AppGUI implements AppStyleArbiter {
         // HAS BEEN CONSTRUCTED, BUT WON'T BE ADDED UNTIL
         // THE USER STARTS EDITING A COURSE
         appPane = new BorderPane();
-        
         appPane.setTop(fileToolbarPane);
         primaryScene = new Scene(appPane);
         
@@ -238,7 +252,7 @@ public class AppGUI implements AppStyleArbiter {
      */
     @Override
     public void initStyle() {
-	fileToolbarPane.getStyleClass().add(CLASS_BORDERED_PANE);
+	//fileToolbarPane.getStyleClass().add(CLASS_BORDERED_PANE);
 	newButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	loadButton.getStyleClass().add(CLASS_FILE_BUTTON);
 	saveButton.getStyleClass().add(CLASS_FILE_BUTTON);

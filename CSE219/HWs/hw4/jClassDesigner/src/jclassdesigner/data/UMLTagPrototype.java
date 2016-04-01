@@ -10,8 +10,12 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class UMLTagPrototype {
-    //FIRST SOME CONSTANTS
+    //FIRST SOME CONSTANTS WHICH WILL SETUP YOUR BASIC METHOD OR VARIABLE
     
+    public static final String ATTRIBUTE_PUBLIC = "public";
+    public static final String ATTRIBUTE_PRIVATE = "private";
+   
+
     //public static final String
     
      String className;

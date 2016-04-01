@@ -11,6 +11,7 @@ package saf.components;
 public interface AppStyleArbiter {
     // THESE ARE COMMON STYLE CLASSES WE'LL USE
     public static final String CLASS_BORDERED_PANE = "bordered_pane";
+    public static final String CLASS_TOOLBAR = "toolbar";
     public static final String CLASS_HEADING_LABEL = "heading_label";
     public static final String CLASS_SUBHEADING_LABEL = "subheading_label";
     public static final String CLASS_PROMPT_LABEL = "prompt_label";
