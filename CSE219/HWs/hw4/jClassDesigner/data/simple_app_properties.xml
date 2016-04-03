@@ -1,42 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This XML file allows us to easily customize the look and language used in our
-program's user interface. Note that this properties file is only for the standard
-controls for an app from the SimpleAppFramework, so it would not include things
-instantiated for the workspace, which is customizable.
-
+    This XML file allows us to easily customize the look and language used
+    in our program's user interface. Note that this properties file is only
+    for the standard controls for an app from the SimpleAppFramework, so
+    it would not include things initialized for the workspace, which is
+    customizable.
 -->
-
 <properties>
-    <properties_list>
+    <property_list>
         <property name="APP_TITLE"	    value="jClass Designer"></property>
 	<property name="APP_LOGO"	    value="jClassDesigner.png"></property>
 	<property name="APP_PATH_CSS"	    value="css/"></property>
 	<property name="APP_CSS"	    value="jClassDesigner_style.css"></property>
         
-        <!-- PROGRAM THE ICON FILES -->
-        
-        <property name ="NEW_ICON"         value = "New.png"></property>
+        <!-- PROGRAM ICON FILES -->
+        <property name="NEW_ICON"	    value="New.png"></property>
+        <property name="CUSTOM_ICON"             value="C.png"></property>
         <property name="LOAD_ICON"	    value="Load.png"></property>
         <property name="SAVE_ICON"	    value="Save.png"></property>
         <property name="EXIT_ICON"          value="Exit.png"></property>
-        <property name="SAVE_AS_ICON"       value="SaveAs.png"></property>  
+        <property name="SAVE_AS_ICON"       value="SaveAs.png"></property>   
         <property name="SELECTION_TOOL_ICON" value="SelectionTool.png"></property>
         <property name="REMOVE_ICON"		value="Remove.png"></property>
         
         
-        
-        
         <!-- TOOLTIPS FOR BUTTONS -->
-         <property name="NEW_TOOLTIP"		value="Create a New jClass Design"></property>
+        <property name="NEW_TOOLTIP"		value="Create a New jClass Design"></property>
+        <property name="CUSTOM_TOOLTIP"              value="Custom Button"></property>
         <property name="LOAD_TOOLTIP"		value="Load an Existing jClass Design"></property>
         <property name="SAVE_TOOLTIP"		value="Save this jClass Design"></property>
+        <property name="EXIT_TOOLTIP"		value="Exit the Application"></property>
         <property name="SAVE_AS_TOOLTIP"         value="Save this jClass Design"></property>
         <property name="EXIT_TOOLTIP"		value="Exit the Application"></property>
         <property name="SELECTION_TOOL_TOOLTIP"	    value="Use Shape Selection Tool"></property>
         <property name="REMOVE_ELEMENT_TOOLTIP"	    value="Remove Element"></property>
 	
-        
         <!-- ERROR MESSAGES -->
         <property name="CLOSE_BUTTON_TEXT"              value="Close"></property>
 
@@ -48,7 +46,9 @@ instantiated for the workspace, which is customizable.
         <property name="SAVE_ERROR_TITLE"		value="Save Work Error"></property>
         <property name="PROPERTIES_LOAD_ERROR_MESSAGE"	value="An error occured loading a properties file."></property>	
         <property name="PROPERTIES_LOAD_ERROR_TITLE"	value="Properties File Loading Error"></property>
-        
+	
+        <!-- VERIFICATION MESSAGES -->
+	
         <property name="NEW_COMPLETED_MESSAGE"		value="New Work Ready for Editing"></property>
         <property name="NEW_COMPLETED_TITLE"		value="New Work Created"></property>
         <property name="LOAD_COMPLETED_MESSAGE"		value="File Loading Completed and ready for editing"></property>
@@ -57,17 +57,16 @@ instantiated for the workspace, which is customizable.
         <property name="SAVE_COMPLETED_TITLE"		value="Saving Completed"></property>
         <property name="SAVE_UNSAVED_WORK_MESSAGE"	value="Would you like to save your unsaved work first?"></property>
         <property name="SAVE_UNSAVED_WORK_TITLE"	value="Save unsaved work?"></property>
-        
+	
         <property name="NEW_CREATED_MESSAGE"		value="New Work Created but not yet Saved"></property>
         <property name="WORK_LOADED_MESSAGE"		value="The Work has been Loaded"></property>
         <property name="WORK_SAVED_MESSAGE"		value="The Work has been Saved"></property>
         <property name="SAVE_UNSAVED_WORK_MESSAGE"	value="Do you want to save your unsaved work first?"></property>
 	<property name="SAVE_WORK_TITLE"		value="Save your work"></property>
 	<property name="LOAD_WORK_TITLE"		value="Select work file to load"></property>
-	<property name="WORK_FILE_EXT"			value="jClass Designer"></property>
-	<property name="WORK_FILE_EXT_DESC"		value="jClass Designer Files"></property>
-    </properties_list>
-    
+	<property name="WORK_FILE_EXT"			value="pm"></property>
+	<property name="WORK_FILE_EXT_DESC"		value="Pose Maker Files"></property>
+    </property_list>
     <property_options_list>
     </property_options_list>
 </properties>

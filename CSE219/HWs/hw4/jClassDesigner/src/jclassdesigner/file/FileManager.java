@@ -28,6 +28,7 @@ public class FileManager implements AppFileComponent{
      * in data from the file.
      */
     public void loadData(AppDataComponent data, String filePath) throws IOException {
+        DataManager datamanager = (DataManager) data;
     }
 
 
@@ -46,6 +47,9 @@ public class FileManager implements AppFileComponent{
      */
     @Override
     public void saveData(AppDataComponent data, String filePath)throws IOException{
+        
+        DataManager dataManager = (DataManager) data;
+        
         
     }
     

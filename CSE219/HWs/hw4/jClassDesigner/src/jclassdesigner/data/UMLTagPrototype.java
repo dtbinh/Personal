@@ -14,6 +14,8 @@ public class UMLTagPrototype {
     
     public static final String ATTRIBUTE_PUBLIC = "public";
     public static final String ATTRIBUTE_PRIVATE = "private";
+    public static final String ATTRIBUTE_ABSTRACT = "abstract";
+    public static final String ATTRIBUTE_STATIC = "static";
    
 
     //public static final String
