@@ -3,6 +3,7 @@ package saf.ui;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,7 +33,9 @@ import saf.components.AppStyleArbiter;
  * @version 1.0
  */
 public class AppGUI implements AppStyleArbiter {
-    static final String CLASS_BLUE_BACKGROUND = "blue_background";
+    public static final String CLASS_PART_TOOLBAR = "toolbar";
+    public static final String CLASS_BLUE_BACKGROUND = "blue_background";
+    public static final String CLASS_TOOLBAR_BUTTON = "toolbar_button";
     
     // THIS HANDLES INTERACTIONS WITH FILE-RELATED CONTROLS
     protected AppFileController fileController;
@@ -58,8 +61,23 @@ public class AppGUI implements AppStyleArbiter {
     protected Button exitButton;
     
     protected VBox customButtons;
-    protected Button customButton1;
-    protected Button customButton2;
+    protected Button codeButton;
+    protected Button photoButton;
+    
+    public FlowPane editToolbar;
+    protected Button selectButton;
+    protected Button resizeButton;
+    protected Button addClassButton;
+    protected Button addInterfaceButton;
+    protected Button removeButton;
+    protected Button undoButton;
+    protected Button redoButton;
+    
+    public FlowPane viewToolBar;
+    Button zoomInButton;
+    Button zoomOutButton;
+    CheckBox gridBox;
+    CheckBox snapBox;
     
     
     // HERE ARE OUR DIALOGS
@@ -87,6 +105,17 @@ public class AppGUI implements AppStyleArbiter {
 		
         // AND FINALLY START UP THE WINDOW (WITHOUT THE WORKSPACE)
         initWindow();
+    }
+    
+      /**
+     * This function adds an additional toolbars to the top file toolbar.
+     */
+    
+    public void initEditToolbar(){
+        editToolbar = new FlowPane(); 
+        selectButton = initChildButton(editToolbar, SELECT_ICON.toString(), SELECTION_TOOLTIP.toString(), true);
+        resizeButton = initChildButton(editToolbar, RESIZE_ICON.toString(), RESIZE_TOOLTIP.toString(), true);
+        
     }
     
     /**
@@ -144,6 +173,9 @@ public class AppGUI implements AppStyleArbiter {
         // ALL THE OTHER BUTTONS ARE ALWAYS ENABLED
         // ONCE EDITING THAT FIRST COURSE BEGINS
 	newButton.setDisable(false);
+        codeButton.setDisable(false);
+        photoButton.setDisable(false);
+        saveAsButton.setDisable(false);
 	exitButton.setDisable(false);
 
         // NOTE THAT THE NEW, LOAD, AND EXIT BUTTONS
@@ -161,11 +193,6 @@ public class AppGUI implements AppStyleArbiter {
     private void initFileToolbar(AppTemplate app) {
         fileToolbarPane = new FlowPane();
         fileInteractToolbar = new FlowPane();
-        
-        
-        //fileToolbarPane.getStyleClass().add(CLASS_BLUE_BACKGROUND);
-        
-     
 
         // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
         // START AS ENABLED (false), WHILE OTHERS DISABLED (true)
@@ -176,9 +203,10 @@ public class AppGUI implements AppStyleArbiter {
         //must insert the custom buttons
         
         customButtons = new VBox();
-        customButton1 = initChildButton(customButtons,      CUSTOM_ICON.toString(),          CUSTOM_TOOLTIP.toString(),       true);
-        customButton2 = initChildButton(customButtons,      CUSTOM_ICON.toString(),          CUSTOM_TOOLTIP.toString(),       true);
-      
+        photoButton = initChildButton(customButtons, SNAPSHOT_ICON.toString(), SNAPSHOT_TOOLTIP.toString(), true);
+        codeButton = initChildButton(customButtons, CODE_ICON.toString(), CODE_TOOLTIP.toString(), true);
+        
+        //newButton.setPrefSize(customButton1.getWidth(), customButton1.getHeight());
         fileInteractToolbar.getChildren().add(customButtons);
         //Now for that Exit Button
         exitButton = initChildButton(fileInteractToolbar,	EXIT_ICON.toString(),	    EXIT_TOOLTIP.toString(),	false);
@@ -197,6 +225,7 @@ public class AppGUI implements AppStyleArbiter {
             fileController.handleExitRequest();
         });	
         fileToolbarPane.getChildren().add(fileInteractToolbar);
+        
     }
 
     // INITIALIZE THE WINDOW (i.e. STAGE) PUTTING ALL THE CONTROLS
@@ -275,10 +304,15 @@ public class AppGUI implements AppStyleArbiter {
      */
     @Override
     public void initStyle() {
-	fileToolbarPane.getStyleClass().add(CLASS_FILE_TOOLBAR);
-	newButton.getStyleClass().add(CLASS_FILE_BUTTON);
-	saveButton.getStyleClass().add(CLASS_FILE_BUTTON);
-	exitButton.getStyleClass().add(CLASS_FILE_BUTTON);
+	//fileToolbarPane.getStyleClass().add(CLASS_FILE_TOOLBAR);
+        fileInteractToolbar.getStyleClass().add(CLASS_PART_TOOLBAR);
+	newButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        saveAsButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        loadButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+	saveButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+	exitButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        codeButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        photoButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
     }
      
      /**
@@ -294,8 +328,8 @@ public class AppGUI implements AppStyleArbiter {
       * @return The current 1st Custom Button
       */
      
-     public Button getCustom1(){
-         return this.customButton1;
+     public Button getPhotoButton(){
+          return this.photoButton;
      }
      
      /**
@@ -303,20 +337,29 @@ public class AppGUI implements AppStyleArbiter {
       * @return The current 2nd Custom Button
       */
      
-     public Button getCustom2(){
-         return this.customButton2;
+     public Button getCodeButton(){
+         return this.codeButton;
      }
      
-     /**
-      * This function allows you to input two buttons to a function and set the two custom buttons to the inputs
-      * @param topButton The button input that will be the top custom button
-      * @param bottomButton The button input that will be the bottom custom button
-      * */
+        /**
+     * This function returns the current state of the grid checkbox
+     * @return A checkBox that represents the gridBox
+     */
+    
+    public CheckBox getGridBox(){
+        return this.gridBox;
+    }
+    
+    /**
+     * This function returns the current state of the snapBox
+     * @return A checkBox that represents the snapBox
+     */
+    
+    public CheckBox getSnapBox(){
+        return this.snapBox;
+    }
      
-     public void setupCustoms(Button topButton, Button bottomButton){
-         this.customButton1 = topButton;
-         this.customButton2 = bottomButton;
-     }
+    
      
      
 }

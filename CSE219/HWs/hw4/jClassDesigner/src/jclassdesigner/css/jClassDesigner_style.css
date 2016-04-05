@@ -11,8 +11,11 @@ order to be rendered using those properties.
 */
 
 .toolbar{
-    -fx-background-color: #00FFFF;
-    -fx-border-width: 3px;
+    -fx-background-color: lightblue;
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-padding: 2;
     
 }
 
@@ -21,12 +24,12 @@ order to be rendered using those properties.
 }
 
 .toolbar_button{
-    -fx-padding: 10;
-    -fx-background-color:  #A9A9A9;
+    -fx-padding: 5;
+    -fx-background-color:  red;
     -fx-background-radius: 5;
-    -fx-border-width: 2px;
-    -fx-border-color: black;
     -fx-border-radius: 5;
+    -fx-border-width: 4;
+    -fx-border-color: black;
     
 }
 

@@ -35,8 +35,8 @@ public class JClassDesigner extends AppTemplate{
      */
     @Override
     public AppComponentsBuilder makeAppBuilderHook() {
-        System.out.println("hello");
-	return new AppComponentsBuilder() {
+      
+        return new AppComponentsBuilder() {
 	    /**
 	     * Makes the returns the data component for the app.
 	     * 

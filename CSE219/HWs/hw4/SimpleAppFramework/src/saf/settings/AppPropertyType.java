@@ -24,9 +24,16 @@ public enum AppPropertyType {
         CUSTOM_ICON,
         SELECTION_TOOL_ICON,
         REMOVE_ICON,
+        SNAPSHOT_ICON,
+        SNAPSHOT_TOOLTIP,
+        CODE_ICON,
+        CODE_TOOLTIP,
+        SELECT_ICON,
+        SELECTION_TOOLTIP,
         
         // APPLICATION TOOLTIPS FOR BUTTONS
         NEW_TOOLTIP,
+        PHOTO_TOOLTIP,
         LOAD_TOOLTIP,
         CUSTOM_TOOLTIP,
         SAVE_TOOLTIP,

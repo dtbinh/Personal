@@ -22,6 +22,8 @@
         <property name="SAVE_AS_ICON"       value="SaveAs.png"></property>   
         <property name="SELECTION_TOOL_ICON" value="SelectionTool.png"></property>
         <property name="REMOVE_ICON"		value="Remove.png"></property>
+        <property name="SNAPSHOT_ICON"		value="Snapshot.png"></property>
+        <property name="CODE_ICON"              value="JAVA.png"></property>
         
         
         <!-- TOOLTIPS FOR BUTTONS -->
@@ -34,6 +36,9 @@
         <property name="EXIT_TOOLTIP"		value="Exit the Application"></property>
         <property name="SELECTION_TOOL_TOOLTIP"	    value="Use Shape Selection Tool"></property>
         <property name="REMOVE_ELEMENT_TOOLTIP"	    value="Remove Element"></property>
+        <property name="SNAPSHOT_TOOLTIP"	    value="Export to Image file"></property>
+        <property name="CODE_TOOLTIP"               value="Export to Java Code"></property>
+	
 	
         <!-- ERROR MESSAGES -->
         <property name="CLOSE_BUTTON_TEXT"              value="Close"></property>

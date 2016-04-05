@@ -13,8 +13,7 @@
 	<property name="ELLIPSE_ICON"		value="Ellipse.png"></property>
 	<property name="MOVE_TO_FRONT_ICON"	value="MoveToFront.png"></property>
 	<property name="MOVE_TO_BACK_ICON"	value="MoveToBack.png"></property>
-	<property name="SNAPSHOT_ICON"		value="Snapshot.png"></property>
-        
+	
         <!-- TOOLTIPS FOR BUTTONS -->
 	<property name="SELECTION_TOOL_TOOLTIP"	    value="Use Shape Selection Tool"></property>
         <property name="REMOVE_ELEMENT_TOOLTIP"	    value="Remove Element"></property>
@@ -25,7 +24,6 @@
 	<property name="BACKGROUND_TOOLTIP"	    value="Select Background Color"></property>
 	<property name="FILL_TOOLTIP"		    value="Select Fill Color"></property>
 	<property name="OUTLINE_TOOLTIP"	    value="Select Outline Color"></property>
-	<property name="SNAPSHOT_TOOLTIP"	    value="Take Snapshot"></property>
 	
 	<!-- MESSAGES -->
 	<property name="REMOVE_ELEMENT_MESSAGE"	    value="Are you sure you wish to remove that element?"></property>
