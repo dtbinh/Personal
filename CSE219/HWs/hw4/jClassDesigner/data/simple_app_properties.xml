@@ -24,8 +24,17 @@
         <property name="REMOVE_ICON"		value="Remove.png"></property>
         <property name="SNAPSHOT_ICON"		value="Snapshot.png"></property>
         <property name="CODE_ICON"              value="JAVA.png"></property>
+        <property name="RESIZE_ICON"                value="Dimensions.png"></property>
+        <property name="ADD_CLASS_ICON"             value="add_class.png"></property>
+        <property name="ADD_INTERFACE_ICON"         value="add_interface.png"></property>
+        <property name="UNDO_ICON"                  value="Undo.png"></property>
+        <property name="REDO_ICON"                  value="Redo.png"></property>
+        <property name="ZOOM_IN_ICON"              value="ZoomIn.png"></property>
+        <property name="ZOOM_OUT_ICON"              value="ZoomOut.png"></property>
+        <property name="TITLE_ICON"                 value="LogoIcon.png"></property>
         
         
+
         <!-- TOOLTIPS FOR BUTTONS -->
         <property name="NEW_TOOLTIP"		value="Create a New jClass Design"></property>
         <property name="CUSTOM_TOOLTIP"              value="Custom Button"></property>
@@ -38,8 +47,15 @@
         <property name="REMOVE_ELEMENT_TOOLTIP"	    value="Remove Element"></property>
         <property name="SNAPSHOT_TOOLTIP"	    value="Export to Image file"></property>
         <property name="CODE_TOOLTIP"               value="Export to Java Code"></property>
-	
-	
+        <property name="SELECTION_TOOLTIP"          value="Select an object"></property>
+        <property name="RESIZE_TOOLTIP"            value="Resize the curren object"></property>
+        <property name="ADD_CLASS_TOOLTIP"          value="Add a new class"></property>
+        <property name="ADD_INTERFACE_TOOLTIP"      value="Add a new interface"></property>   
+        <property name="UNDO_TOOLTIP"               value="Undo"></property>            
+        <property name="REDO_TOOLTIP"               value="Redo"></property>   
+        <property name="ZOOM_IN_TOOLTIP"            value="Zoom In"></property>     
+        <property name="ZOOM_OUT_TOOLTIP"           value="Zoom Out"></property>
+        
         <!-- ERROR MESSAGES -->
         <property name="CLOSE_BUTTON_TEXT"              value="Close"></property>
 

@@ -9,9 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import properties_manager.PropertiesManager;
@@ -36,6 +36,9 @@ public class AppGUI implements AppStyleArbiter {
     public static final String CLASS_PART_TOOLBAR = "toolbar";
     public static final String CLASS_BLUE_BACKGROUND = "blue_background";
     public static final String CLASS_TOOLBAR_BUTTON = "toolbar_button";
+    public static final String CLASS_TOOLBAR_CHECKBOXES = "toolbar_checkboxes";
+    public static final String CLASS_TITLE_BUTTON = "title";
+    public static final String CLASS_TITLE_TOOLBAR = "title_toolbar";
     
     // THIS HANDLES INTERACTIONS WITH FILE-RELATED CONTROLS
     protected AppFileController fileController;
@@ -52,6 +55,8 @@ public class AppGUI implements AppStyleArbiter {
     
     // THIS IS THE TOP LEFT TOOLBAR AND ITS CONTROLS
     public FlowPane fileToolbarPane;
+    public FlowPane textPane;
+    public Button textButton;
     public FlowPane fileInteractToolbar;
     
     protected Button newButton;
@@ -73,11 +78,12 @@ public class AppGUI implements AppStyleArbiter {
     protected Button undoButton;
     protected Button redoButton;
     
-    public FlowPane viewToolBar;
-    Button zoomInButton;
-    Button zoomOutButton;
-    CheckBox gridBox;
-    CheckBox snapBox;
+    public FlowPane viewToolbar;
+    protected Button zoomInButton;
+    protected Button zoomOutButton;
+    protected VBox checkBoxes;
+    protected CheckBox gridBox;
+    protected CheckBox snapBox;
     
     
     // HERE ARE OUR DIALOGS
@@ -108,15 +114,40 @@ public class AppGUI implements AppStyleArbiter {
     }
     
       /**
-     * This function adds an additional toolbars to the top file toolbar.
+     * This function initializes and adds the Editing toolbar in our application
      */
     
     public void initEditToolbar(){
         editToolbar = new FlowPane(); 
-        selectButton = initChildButton(editToolbar, SELECT_ICON.toString(), SELECTION_TOOLTIP.toString(), true);
+        editToolbar.setPrefWrapLength(420);
+        selectButton = initChildButton(editToolbar, SELECTION_TOOL_ICON.toString(), SELECTION_TOOLTIP.toString(), true);
         resizeButton = initChildButton(editToolbar, RESIZE_ICON.toString(), RESIZE_TOOLTIP.toString(), true);
+        addClassButton = initChildButton(editToolbar, ADD_CLASS_ICON.toString(), ADD_CLASS_TOOLTIP.toString(), true);
+        addInterfaceButton = initChildButton(editToolbar, ADD_INTERFACE_ICON.toString(), ADD_INTERFACE_TOOLTIP.toString(), true);
+        removeButton = initChildButton(editToolbar, REMOVE_ICON.toString(), REMOVE_ELEMENT_TOOLTIP.toString(), true); 
+        undoButton = initChildButton(editToolbar, UNDO_ICON.toString(), UNDO_TOOLTIP.toString(), true);
+        redoButton = initChildButton(editToolbar, REDO_ICON.toString(), REDO_TOOLTIP.toString(), true);
+        fileToolbarPane.getChildren().add(editToolbar);
+    }
+    
+    /** 
+     * This function initializes and adds the viewing toolbar in this application 
+     */
+    public void initViewToolbar(){
+        viewToolbar = new FlowPane();
+        viewToolbar.setPrefWrapLength(180);
+        zoomInButton = initChildButton(viewToolbar, ZOOM_IN_ICON.toString(), ZOOM_IN_TOOLTIP.toString(), true);
+        zoomOutButton = initChildButton(viewToolbar, ZOOM_OUT_ICON.toString(), ZOOM_OUT_TOOLTIP.toString(), true);
+        checkBoxes = new VBox();
+        gridBox = new CheckBox("Grid");
+        snapBox = new CheckBox("Snap");
+        checkBoxes.getChildren().add(gridBox);
+        checkBoxes.getChildren().add(snapBox);
+        viewToolbar.getChildren().add(checkBoxes);
+        fileToolbarPane.getChildren().add(viewToolbar);
         
     }
+    
     
     /**
      * Accessor method for getting the file toolbar pane
@@ -177,6 +208,9 @@ public class AppGUI implements AppStyleArbiter {
         photoButton.setDisable(false);
         saveAsButton.setDisable(false);
 	exitButton.setDisable(false);
+        addClassButton.setDisable(false);
+        addInterfaceButton.setDisable(false);
+        selectButton.setDisable(false);
 
         // NOTE THAT THE NEW, LOAD, AND EXIT BUTTONS
         // ARE NEVER DISABLED SO WE NEVER HAVE TO TOUCH THEM
@@ -193,7 +227,12 @@ public class AppGUI implements AppStyleArbiter {
     private void initFileToolbar(AppTemplate app) {
         fileToolbarPane = new FlowPane();
         fileInteractToolbar = new FlowPane();
-
+        fileInteractToolbar.setPrefWrapLength(340);
+        
+        textPane = new FlowPane();
+        textPane.setPrefWrapLength(300);
+        textButton = initChildButton(textPane, TITLE_ICON.toString(), "", false);
+        fileToolbarPane.getChildren().add(textPane);
         // HERE ARE OUR FILE TOOLBAR BUTTONS, NOTE THAT SOME WILL
         // START AS ENABLED (false), WHILE OTHERS DISABLED (true)
         newButton = initChildButton(fileInteractToolbar,	NEW_ICON.toString(),	    NEW_TOOLTIP.toString(),	false);
@@ -225,7 +264,8 @@ public class AppGUI implements AppStyleArbiter {
             fileController.handleExitRequest();
         });	
         fileToolbarPane.getChildren().add(fileInteractToolbar);
-        
+        initEditToolbar();
+        initViewToolbar();
     }
 
     // INITIALIZE THE WINDOW (i.e. STAGE) PUTTING ALL THE CONTROLS
@@ -306,6 +346,10 @@ public class AppGUI implements AppStyleArbiter {
     public void initStyle() {
 	//fileToolbarPane.getStyleClass().add(CLASS_FILE_TOOLBAR);
         fileInteractToolbar.getStyleClass().add(CLASS_PART_TOOLBAR);
+        textPane.getStyleClass().add(CLASS_PART_TOOLBAR);
+        editToolbar.getStyleClass().add(CLASS_PART_TOOLBAR);
+        viewToolbar.getStyleClass().add(CLASS_PART_TOOLBAR);
+        checkBoxes.getStyleClass().add(CLASS_TOOLBAR_CHECKBOXES);
 	newButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
         saveAsButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
         loadButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
@@ -313,6 +357,17 @@ public class AppGUI implements AppStyleArbiter {
 	exitButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
         codeButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
         photoButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        addClassButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        addInterfaceButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        resizeButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        removeButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        selectButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        undoButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        redoButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        zoomInButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        zoomOutButton.getStyleClass().add(CLASS_TOOLBAR_BUTTON);
+        textButton.getStyleClass().add(CLASS_TITLE_BUTTON);
+        
     }
      
      /**
@@ -341,6 +396,33 @@ public class AppGUI implements AppStyleArbiter {
          return this.codeButton;
      }
      
+     public Button getSelectionButton(){
+         return this.selectButton;
+     }
+     
+     public Button getRemoveButton(){
+         return this.removeButton;
+     }
+     
+     public Button getAddClassButton(){
+         return this.addClassButton;
+     }
+     
+     public Button getAddInterfaceButton(){
+         return this.addInterfaceButton;
+     }     
+     
+     public Button getResizeButton(){
+         return this.resizeButton;
+     }
+     
+     public Button getUndoButton(){
+         return this.undoButton;
+     }
+     
+     public Button getRedoButton(){
+         return this.redoButton;
+     }
         /**
      * This function returns the current state of the grid checkbox
      * @return A checkBox that represents the gridBox

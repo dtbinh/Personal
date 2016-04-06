@@ -7,15 +7,18 @@ package jclassdesigner.gui;
 
 import java.io.IOException;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import jclassdesigner.controller.CanvasController;
 import jclassdesigner.controller.ComponentEditController;
+import jclassdesigner.data.UMLTagPrototype;
 import saf.AppTemplate;
 import saf.components.AppWorkspaceComponent;
 import saf.ui.AppGUI;
@@ -32,6 +35,10 @@ public class Workspace extends AppWorkspaceComponent{
     public static final String CLASS_TOOLBAR_BUTTON = "toolbar_button";
     public static final String CLASS_RENDER_CANVAS = "render_canvas";
     public static final String CLASS_COMPONENT_EDITOR = "component_editor";
+    public static final String CLASS_LABEL = "class_label";
+    public static final String CLASS_TEXT_FIELD = "text_field";
+    public static final String CLASS_NORMAL_LABEL = "normal_label";
+    public static final String CLASS_LABEL_FIELD = "label_field";
     //This here's the app
     AppTemplate app;
     
@@ -53,26 +60,32 @@ public class Workspace extends AppWorkspaceComponent{
     VBox componentToolbar;
     
     //ROW FOR THE CLASS NAME
-    HBox row1Box;
+    FlowPane row1Pane;
+    Label classLabel;
     TextField classNameField;
- 
-    //ROW FOR THE PACKAGE NAME
-    HBox row2Box;
+    
+    FlowPane row2Pane;
+    Label packageLabel;
     TextField classPackageField;
     
-    //ROW FOR THE PARENT CLASS
-    HBox row3Box;
+    FlowPane row3Pane;
+    Label parentLabel;
     ChoiceBox parentChoice = new ChoiceBox();
     
     //ROW FOR THE VARIABLES
     HBox row4Box;
+    Label variableLabel;
     Button addVariableButton;
     Button removeVariableButton;
     
     //ROW FOR THE METHOD
     HBox row5Box;
+    Label methodLabel;
     Button addMethodButton;
     Button removeMethodButton;
+    
+    String mode;
+    Text debugText;
      
      /**
      * Constructor for initializing the workspace, note that this constructor
@@ -88,27 +101,87 @@ public class Workspace extends AppWorkspaceComponent{
         app = initApp;
         
         gui = app.getGUI();
+        layoutGUI();
+        initHandlers();
         
-
-        setupRenderer();
-        setupComponent();
     }
     
     
     /**
-     * This function sets up the view of the design renderer
+     * This function sets up the view of the design renderer and the component toolbar
      * 
      */
     
-    public void setupRenderer(){
+    public void layoutGUI(){
+        componentToolbar = new VBox();
+        
+        
+        row1Pane = new FlowPane();
+        classLabel = new Label("Class Name:          ");
+        classNameField = new TextField();
+        row1Pane.getChildren().add(classLabel);
+        row1Pane.getChildren().add(classNameField);
+        componentToolbar.getChildren().add(row1Pane);
+        
+        row2Pane = new FlowPane();
+        packageLabel = new Label("Package:                              ");
+        classPackageField = new TextField();
+        row2Pane.getChildren().add(packageLabel);
+        row2Pane.getChildren().add(classPackageField);
+        componentToolbar.getChildren().add(row2Pane);
+        
+        row3Pane = new FlowPane();
+        parentLabel = new Label("Parent:                                    ");
+        parentChoice = new ChoiceBox();
+        row3Pane.getChildren().add(parentLabel);
+        row3Pane.getChildren().add(parentChoice);
+        componentToolbar.getChildren().add(row3Pane);
+        
+        canvas = new Pane();
+        debugText = new Text();
+        canvas.getChildren().add(debugText);
+        workspace = new BorderPane();
+        debugText.setX(100);
+        debugText.setY(100);
+        componentToolbar.setPrefWidth(500);
+        ((BorderPane)workspace).setRight(componentToolbar);
+        ((BorderPane)workspace).setCenter(canvas);
+        mode = "adding";
     }
     
-    /**
-     * This function sets up the component toolbar and all of its buttons
-     */
-    
-    public void setupComponent(){
+    public void initHandlers(){
+        componentEditController = new ComponentEditController(app);
+        classNameField.setOnKeyReleased(e -> {  
+            componentEditController.handleClassNameUpdate(classNameField.getText());
+        });
+        gui.getAddClassButton().setOnAction(e -> {
+            componentEditController.handleNewClassRequest();
+            gui.getSelectionButton().setDisable(false);
+            mode = "adding";
+        });
+        gui.getSelectionButton().setOnAction(e ->{
+            mode = "selecting";
+            gui.getSelectionButton().setDisable(true);
+        });
+        
+        canvasController = new CanvasController(app);
+        canvas.setOnMousePressed(eh -> {
+            canvasController.processCanvasMousePress((int)eh.getX(), (int)eh.getY());
+        });
+        
+        canvas.setOnMouseDragged(e -> {
+            canvasController.processCanvasMouseDragged((int)e.getX(), (int)e.getY());
+        });
+        
+        canvas.setOnMouseReleased(e -> {
+            canvasController.processCanvasMouseRelease((int)e.getX(), (int)e.getY());
+        });
     }
+    
+    public String getMode(){
+        return this.mode;
+    }
+ 
     
     /**
      * This function returns the Choicebox in the Component Toolbar
@@ -139,10 +212,45 @@ public class Workspace extends AppWorkspaceComponent{
 	// NOTE THAT EACH CLASS SHOULD CORRESPOND TO
 	// A STYLE CLASS SPECIFIED IN THIS APPLICATION'S
 	//CSS FILE
+        canvas.getStyleClass().add(CLASS_RENDER_CANVAS);
+        componentToolbar.getStyleClass().add(CLASS_COMPONENT_EDITOR);
+        classLabel.getStyleClass().add(CLASS_LABEL);
+        row1Pane.getStyleClass().add(CLASS_LABEL_FIELD);
+        packageLabel.getStyleClass().add(CLASS_NORMAL_LABEL);
+        parentLabel.getStyleClass().add(CLASS_NORMAL_LABEL);
+    }
+    
+    /**
+     * retrieves the textField for the class Name
+     * @return TextField The textfield for the class name
+     */
+    
+    public TextField getClassName(){
+        return classNameField;
+    }
+    
+    /**
+     * retrieves the choicebox for the list of parent classes available
+     */
+    
+    public ChoiceBox getParents(){
+        return parentChoice;
     }
     
     
+    public Pane getCanvas(){
+        return this.canvas;
+    }
     
+    public void loadSelectedTagProperties(UMLTagPrototype tag){
+        if(tag != null){
+            classNameField.setText(tag.getClassName());
+            classPackageField.setText(tag.getPackageName());
+        }
+    }
     
+    public void setMode(String newMode){
+        this.mode = newMode;
+    }
     
 }

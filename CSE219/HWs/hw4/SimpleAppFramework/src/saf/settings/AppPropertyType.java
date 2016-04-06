@@ -25,11 +25,18 @@ public enum AppPropertyType {
         SELECTION_TOOL_ICON,
         REMOVE_ICON,
         SNAPSHOT_ICON,
-        SNAPSHOT_TOOLTIP,
         CODE_ICON,
-        CODE_TOOLTIP,
-        SELECT_ICON,
-        SELECTION_TOOLTIP,
+        RESIZE_ICON,
+        ADD_CLASS_ICON,
+        ADD_INTERFACE_ICON,
+        UNDO_ICON,
+        REDO_ICON,
+        ZOOM_IN_ICON,
+        ZOOM_OUT_ICON,
+        
+        
+        
+        
         
         // APPLICATION TOOLTIPS FOR BUTTONS
         NEW_TOOLTIP,
@@ -42,7 +49,18 @@ public enum AppPropertyType {
         EXIT_TOOLTIP,
         SELECTION_TOOL_TOOLTIP,
         REMOVE_ELEMENT_TOOLTIP,
-	
+        SNAPSHOT_TOOLTIP,
+	CODE_TOOLTIP,
+        SELECTION_TOOLTIP,
+        RESIZE_TOOLTIP,
+        ADD_CLASS_TOOLTIP,
+        ADD_INTERFACE_TOOLTIP,
+        UNDO_TOOLTIP,
+        REDO_TOOLTIP,
+        ZOOM_IN_TOOLTIP,
+        ZOOM_OUT_TOOLTIP,
+        TITLE_ICON,
+        
 	// ERROR MESSAGES
 	NEW_ERROR_MESSAGE,
 	SAVE_ERROR_MESSAGE,

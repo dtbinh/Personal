@@ -16,7 +16,17 @@ order to be rendered using those properties.
     -fx-border-color: black;
     -fx-border-radius: 5;
     -fx-padding: 2;
-    
+    -fx-alignment: center;
+}
+
+.title{
+    -fx-background-color:lightblue;  
+    -fx-padding: 0;  
+    }
+
+.title_toolbar{
+    -fx-background-color: lightblue;
+    -fx-alignment:center;
 }
 
 .file_toolbar{
@@ -33,12 +43,48 @@ order to be rendered using those properties.
     
 }
 
-render_canvas{
-    
+.toolbar_checkboxes{
+    -fx-padding: 6;
+    -fx-spacing: 3;
 }
 
-component_editor{
-    
+.render_canvas{
+   -fx-background-color: #fff3c2;
+   -fx-border-width: 5px;
+   -fx-border-radius: 5;
+   -fx-border-color: black;
+}
+
+.tag_label{
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+}
+
+.component_editor{
+    -fx-background-color: #ffdab9;
+    -fx-border-width: 5px;
+    -fx-border-radius: 5;
+    -fx-border-color: black;
+    -fx-padding: 20;
+    -fx-spacing: 40;
+}
+
+.class_label{
+    -fx-font-family: Impact;
+    -fx-font-size: 40px;
+}
+
+.normal_label{
+    -fx-font-family: Impact;
+    -fx-font-size: 30px;
+}
+
+.text_field{
+}
+
+.label_field{
+
 }
 
 
